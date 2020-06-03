@@ -16,8 +16,8 @@ renda financeira.
 
 Recursos utilizados
 
-Google Maps API
-PostgreSQL
-NodeJS
-React Native
+Google Maps API,
+PostgreSQL,
+NodeJS,
+React Native,
 Expo
