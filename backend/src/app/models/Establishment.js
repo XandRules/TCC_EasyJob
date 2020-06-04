@@ -2,21 +2,17 @@ import Sequelize, { Model } from 'sequelize';
 
 import bcrypt from 'bcryptjs';
 
-class Freelancer extends Model {
+class Establishment extends Model {
   static init(sequelize) {
-    // migration de freelancer
+    // migration de Establishment
     super.init(
       {
-        name: Sequelize.STRING,
+        company_name: Sequelize.STRING,
         email: Sequelize.STRING,
-        cpf: Sequelize.STRING,
+        cnpj: Sequelize.STRING,
         phone: Sequelize.STRING,
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
-        latitude: Sequelize.STRING,
-        longitude: Sequelize.STRING,
-        gender: Sequelize.STRING,
-        birth: Sequelize.STRING,
         active: Sequelize.STRING,
         terms_of_use: Sequelize.STRING,
       },
@@ -25,9 +21,12 @@ class Freelancer extends Model {
       }
     );
 
-    this.addHook('beforeSave', async (freelancer) => {
-      if (freelancer.password) {
-        freelancer.password_hash = await bcrypt.hash(freelancer.password, 8);
+    this.addHook('beforeSave', async (establishment) => {
+      if (establishment.password) {
+        establishment.password_hash = await bcrypt.hash(
+          establishment.password,
+          8
+        );
       }
     });
 
@@ -42,4 +41,4 @@ class Freelancer extends Model {
     return bcrypt.compare(password, this.password_hash);
   }
 }
-export default Freelancer;
+export default Establishment;
