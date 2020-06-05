@@ -4,6 +4,7 @@ import multerConfig from './config/multer';
 
 import FreelancerController from './app/controllers/FreelancerController';
 import EstablishmentController from './app/controllers/EstablishmentController';
+import AnnouncementController from './app/controllers/AnnouncementController';
 import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 
@@ -15,6 +16,7 @@ const upload = multer(multerConfig);
 
 routes.post('/freelancers', FreelancerController.store);
 routes.post('/establishment', EstablishmentController.store);
+routes.post('/announcement', AnnouncementController.store);
 routes.get('/establishments', EstablishmentController.index);
 routes.post('/sessionsfreelancer', SessionController.storeFreelancer);
 routes.post('/sessionsestablishment', SessionController.storeEstablishment);
