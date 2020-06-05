@@ -55,7 +55,16 @@ class FreelancerController {
   async index(req, res) {
     const freelancer = await Freelancer.findAll({
       where: { active: true },
-      atributes: ['id', 'name', 'cpf', 'email', 'phone', 'avatar_id', 'gender', 'birth'],
+      atributes: [
+        'id',
+        'name',
+        'cpf',
+        'email',
+        'phone',
+        'avatar_id',
+        'gender',
+        'birth',
+      ],
       include: [
         {
           model: File,

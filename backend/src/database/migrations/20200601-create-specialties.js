@@ -1,20 +1,15 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
-    queryInterface.createTable('files', {
+    queryInterface.createTable('specialities', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      name: {
+      speciality_function: {
         type: Sequelize.STRING,
         allowNull: false,
-      },
-      path: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -27,6 +22,6 @@ module.exports = {
     }),
 
   down: (queryInterface) => {
-    return queryInterface.dropTable('files');
+    return queryInterface.dropTable('specialities');
   },
 };

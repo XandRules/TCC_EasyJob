@@ -28,7 +28,7 @@ routes.put('/freelancers', FreelancerController.update);
 routes.post('/specialities', SpecialityController.store);
 routes.post('/announcement', AnnouncementController.store);
 routes.get('/announcements', AnnouncementController.index);
-routes.put('/announcements', AnnouncementController.update);
+routes.put('/announcements/:id', AnnouncementController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);
 

@@ -20,14 +20,19 @@ class Announcement extends Model {
     return this;
   }
 
- 
   static associate(models) {
-    this.belongsTo(models.Freelancer, { foreignKey: 'freelancer_id', as: 'freelancer'});
-    this.hasMany(models.File,{
-      foreignKey: 'file_id', 
+    this.belongsTo(models.Freelancer, {
+      foreignKey: 'freelancer_id',
+      as: 'freelancer',
+    });
+    this.hasMany(models.File, {
+      foreignKey: 'file_id',
     });
 
-    this.belongsTo(models.Speciality,{foreignKey: 'speciality_id', as: 'speciality'});
+    this.belongsTo(models.Speciality, {
+      foreignKey: 'speciality_id',
+      as: 'speciality',
+    });
   }
 }
 export default Announcement;
