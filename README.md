@@ -1,4 +1,4 @@
-# Repositório do projeto de final de curso 
+# Repositório do projeto de final de curso EasyJob
 
 
 API Rest NodeJS 
@@ -19,5 +19,6 @@ Recursos utilizados
 Google Maps API,
 PostgreSQL,
 NodeJS,
+React,
 React Native,
 Expo
