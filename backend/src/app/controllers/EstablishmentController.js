@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 
 import Establishment from '../models/Establishment';
+import File from '../models/File';
 
 class EstablishmentController {
   async store(req, res) {
@@ -44,6 +45,22 @@ class EstablishmentController {
       cnpj,
       phone,
     });
+  }
+
+  async index(req, res) {
+    const establishment = await Establishment.findAll({
+      where: { active: true },
+      atributes: ['id', 'company_name', 'cnpj', 'email', 'phone', 'avatar_id'],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          atributes: ['name', 'path', 'url'],
+        },
+      ],
+    });
+
+    return res.json(establishment);
   }
 
   async update(req, res) {
