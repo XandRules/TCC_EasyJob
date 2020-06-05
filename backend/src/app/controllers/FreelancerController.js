@@ -1,5 +1,7 @@
 import * as Yup from 'yup';
 
+import File from '../models/File';
+
 import Freelancer from '../models/freelancer';
 
 class FreelancerController {
@@ -50,6 +52,22 @@ class FreelancerController {
     });
   }
 
+  async index(req, res) {
+    const freelancer = await Freelancer.findAll({
+      where: { active: true },
+      atributes: ['id', 'name', 'cpf', 'email', 'phone', 'avatar_id', 'gender', 'birth'],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          atributes: ['name', 'path', 'url'],
+        },
+      ],
+    });
+
+    return res.json(freelancer);
+  }
+
   async update(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string(),
@@ -61,6 +79,7 @@ class FreelancerController {
       birth: Yup.string(),
       terms_of_use: Yup.boolean(),
       oldPassword: Yup.string().min(6),
+      avatar_id: Yup.integer(),
       password: Yup.string()
         .min(6)
         .when('oldPassword', (oldPassword, field) =>

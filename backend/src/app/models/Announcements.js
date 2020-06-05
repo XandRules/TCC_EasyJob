@@ -1,7 +1,5 @@
 import Sequelize, { Model } from 'sequelize';
 
-import bcrypt from 'bcryptjs';
-
 class Announcement extends Model {
   static init(sequelize) {
     // migration de Establishment
@@ -11,6 +9,8 @@ class Announcement extends Model {
         period: Sequelize.STRING,
         amount: Sequelize.STRING,
         day_of_week: Sequelize.STRING,
+        freelancer_id: Sequelize.INTEGER,
+        speciality_id: Sequelize.INTEGER,
       },
       {
         sequelize,
@@ -20,12 +20,14 @@ class Announcement extends Model {
     return this;
   }
 
+ 
   static associate(models) {
-    this.belongsTo(models.File, { foreignKey: 'photo_id', as: 'photo' });
-  }
+    this.belongsTo(models.Freelancer, { foreignKey: 'freelancer_id', as: 'freelancer'});
+    this.hasMany(models.File,{
+      foreignKey: 'file_id', 
+    });
 
-  checkPassword(password) {
-    return bcrypt.compare(password, this.password_hash);
+    this.belongsTo(models.Speciality,{foreignKey: 'speciality_id', as: 'speciality'});
   }
 }
 export default Announcement;

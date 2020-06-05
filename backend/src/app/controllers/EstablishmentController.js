@@ -70,6 +70,7 @@ class EstablishmentController {
       phone: Yup.string(),
       terms_of_use: Yup.boolean(),
       oldPassword: Yup.string().min(6),
+      avatar_id: Yup.integer(),
       password: Yup.string()
         .min(6)
         .when('oldPassword', (oldPassword, field) =>

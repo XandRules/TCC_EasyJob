@@ -20,6 +20,6 @@ class File extends Model {
     );
 
     return this;
-  }
+  } 
 }
 export default File;
