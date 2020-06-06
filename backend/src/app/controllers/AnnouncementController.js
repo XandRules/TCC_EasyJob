@@ -24,8 +24,6 @@ class AnnouncementsController {
       return res.status(401).json({ error });
     }
 
-    console.log(newAnnouncements);
-
     const {
       id,
       description,
@@ -103,6 +101,18 @@ class AnnouncementsController {
       day_of_week,
       speciality_id,
     });
+  }
+
+  async delete(req, res) {
+    const announcements = await Announcements.findByPk(req.params.id);
+
+    // if (!announcements) {
+    //   return res.status(400).json({ error: 'Announcements not Found' });
+    // }
+
+    // const response = await announcements.delete();
+
+    return res.json(announcements);
   }
 }
 
