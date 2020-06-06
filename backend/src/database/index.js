@@ -5,10 +5,18 @@ import Establishment from '../app/models/Establishment';
 import File from '../app/models/File';
 import Speciality from '../app/models/Speciality';
 import Announcements from '../app/models/Announcements';
+import Job from '../app/models/Job';
 
 import databaseConfig from '../config/database';
 
-const models = [Freelancer, Establishment, File, Speciality, Announcements];
+const models = [
+  Freelancer,
+  Establishment,
+  File,
+  Speciality,
+  Announcements,
+  Job,
+];
 
 class Database {
   constructor() {

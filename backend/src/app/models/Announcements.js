@@ -9,8 +9,6 @@ class Announcement extends Model {
         period: Sequelize.STRING,
         amount: Sequelize.STRING,
         day_of_week: Sequelize.STRING,
-        freelancer_id: Sequelize.INTEGER,
-        speciality_id: Sequelize.INTEGER,
       },
       {
         sequelize,
@@ -27,6 +25,7 @@ class Announcement extends Model {
     });
     this.hasMany(models.File, {
       foreignKey: 'file_id',
+      as: 'file',
     });
 
     this.belongsTo(models.Speciality, {

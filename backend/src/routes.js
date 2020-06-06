@@ -8,6 +8,7 @@ import AnnouncementController from './app/controllers/AnnouncementController';
 import SpecialityController from './app/controllers/SpecialityController';
 import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
+import JobController from './app/controllers/JobController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -24,11 +25,13 @@ routes.use(authMiddleware);
 
 routes.get('/freelancers', FreelancerController.index);
 routes.get('/establishments', EstablishmentController.index);
-routes.put('/freelancers', FreelancerController.update);
+routes.put('/freelancers/:id', FreelancerController.update);
 routes.post('/specialities', SpecialityController.store);
+routes.get('/specialities', SpecialityController.index);
 routes.post('/announcement', AnnouncementController.store);
 routes.get('/announcements', AnnouncementController.index);
 routes.put('/announcements/:id', AnnouncementController.update);
+routes.post('/jobs', JobController.store);
 
 routes.post('/files', upload.single('file'), FileController.store);
 

@@ -1,7 +1,5 @@
 import * as Yup from 'yup';
 
-import File from '../models/File';
-
 import Freelancer from '../models/freelancer';
 
 class FreelancerController {
@@ -65,13 +63,6 @@ class FreelancerController {
         'gender',
         'birth',
       ],
-      include: [
-        {
-          model: File,
-          as: 'avatar',
-          atributes: ['name', 'path', 'url'],
-        },
-      ],
     });
 
     return res.json(freelancer);
@@ -80,7 +71,6 @@ class FreelancerController {
   async update(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string(),
-      email: Yup.string(),
       phone: Yup.string(),
       gender: Yup.string(),
       latitude: Yup.string(),
@@ -88,7 +78,7 @@ class FreelancerController {
       birth: Yup.string(),
       terms_of_use: Yup.boolean(),
       oldPassword: Yup.string().min(6),
-      avatar_id: Yup.integer(),
+      avatar_id: Yup.number(),
       password: Yup.string()
         .min(6)
         .when('oldPassword', (oldPassword, field) =>
@@ -103,25 +93,21 @@ class FreelancerController {
       return res.status(400).json('Validation fail');
     }
 
-    const { email, oldPassword } = req.body;
+    const { oldPassword } = req.body;
 
-    const freelancer = await Freelancer.findByPk(req.userId);
+    const freelancer = await Freelancer.findByPk(req.params.id);
 
-    if (email !== freelancer.email) {
-      const freelancerExists = await Freelancer.findOne({
-        where: { email },
-      });
-
-      if (freelancerExists) {
-        return res.status(400).json({ error: 'Freelancer already exists.' });
-      }
+    if (!freelancer) {
+      return res.status(404).json({ error: 'User not Found' });
     }
 
     if (oldPassword && !(await freelancer.checkPassword(oldPassword))) {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { id, name, active, cpf, phone } = await freelancer.update(req.body);
+    const { id, name, email, active, cpf, phone } = await freelancer.update(
+      req.body
+    );
 
     return res.json({
       id,

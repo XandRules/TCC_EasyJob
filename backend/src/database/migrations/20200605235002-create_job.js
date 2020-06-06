@@ -1,26 +1,30 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
-    queryInterface.createTable('announcements', {
+    queryInterface.createTable('jobs', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      description: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      freelancer_evaluation: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
       },
-      period: {
+      freelancer_comment: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
-      amount: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      establishment_evaluation: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
       },
-      day_of_week: {
+      establishment_comment: {
         type: Sequelize.STRING,
+        allowNull: true,
+      },
+      date: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
       freelancer_id: {
@@ -28,20 +32,17 @@ module.exports = {
         references: { model: 'freelancers', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        allowNull: false,
+        allowNull: true,
       },
-      speciality_id: {
+      establishment_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'freelancers', key: 'id' },
+        references: { model: 'establishments', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        allowNull: false,
+        allowNull: true,
       },
-      file_id: {
-        type: Sequelize.INTEGER,
-        references: { model: 'files', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+      canceled_at: {
+        type: Sequelize.DATE,
         allowNull: true,
       },
       created_at: {
@@ -55,6 +56,6 @@ module.exports = {
     }),
 
   down: (queryInterface) => {
-    return queryInterface.dropTable('announcements');
+    return queryInterface.dropTable('jobs');
   },
 };
