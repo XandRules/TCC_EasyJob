@@ -33,6 +33,7 @@ routes.get('/announcements', AnnouncementController.index);
 routes.put('/announcements/:id', AnnouncementController.update);
 routes.delete('/announcements/:id', AnnouncementController.delete);
 routes.post('/jobs', JobController.store);
+routes.get('/jobs', JobController.index);
 
 routes.post('/files', upload.single('file'), FileController.store);
 

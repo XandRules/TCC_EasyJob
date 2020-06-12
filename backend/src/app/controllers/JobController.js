@@ -6,6 +6,14 @@ import Establishment from '../models/Establishment';
 import Announcement from '../models/Announcements';
 
 class JobController {
+  async index(req, res) {
+    const jobs = await Job.findAll({
+      where: { freelancer_id: req.userId, canceled_at: null },
+    });
+
+    return res.json(jobs);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       freelancer_evaluation: Yup.number(),
