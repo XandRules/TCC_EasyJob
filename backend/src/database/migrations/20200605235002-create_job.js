@@ -41,6 +41,13 @@ module.exports = {
         onDelete: 'SET NULL',
         allowNull: true,
       },
+      announcement_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'announcements', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        allowNull: true,
+      },
       canceled_at: {
         type: Sequelize.DATE,
         allowNull: true,

@@ -17,6 +17,7 @@ export default async (req, res, next) => {
     const decoded = await promisify(jwt.verify)(token, authConfig.secret);
 
     req.userId = decoded.id;
+    req.userEmail = decoded.email;
 
     return next();
   } catch (err) {

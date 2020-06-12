@@ -1,7 +1,9 @@
 import * as Yup from 'yup';
+import { startOfHour, parseISO, isBefore } from 'date-fns';
 import Job from '../models/Job';
 import Freelancer from '../models/freelancer';
 import Establishment from '../models/Establishment';
+import Announcement from '../models/Announcements';
 
 class JobController {
   async store(req, res) {
@@ -13,16 +15,17 @@ class JobController {
       date: Yup.date().required(),
       freelancer_id: Yup.number().required(),
       establishment_id: Yup.number().required(),
+      announcement_id: Yup.number().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json('Validation fail');
     }
 
-    const { freelancer_id, establishment_id } = req.body;
+    const { date, freelancer_id, establishment_id, announcement_id } = req.body;
 
     const isFreelancer = await Freelancer.findOne({
-      where: { id: freelancer_id, active: true },
+      where: { id: freelancer_id, active: true, email: req.userEmail },
     });
 
     if (!isFreelancer) {
@@ -35,6 +38,20 @@ class JobController {
 
     if (!isEstablishment) {
       return res.status(401).json('Establishment not Found');
+    }
+
+    const isAnnoucement = await Announcement.findOne({
+      where: { id: announcement_id },
+    });
+
+    if (!isAnnoucement) {
+      return res.status(401).json('Announcement not Found');
+    }
+
+    const hourStart = startOfHour(parseISO(date));
+
+    if (isBefore(hourStart, new Date())) {
+      return res.status(400).json({ error: 'Past dates are not permitted' });
     }
 
     const job = await Job.create(req.body);

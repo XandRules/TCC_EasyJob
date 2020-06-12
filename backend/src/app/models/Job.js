@@ -26,6 +26,11 @@ class Job extends Model {
       foreignKey: 'establishment_id',
       as: 'establishment',
     });
+
+    this.belongsTo(models.Announcement, {
+      foreignKey: 'announcement_id',
+      as: 'announcement',
+    });
   }
 }
 export default Job;
