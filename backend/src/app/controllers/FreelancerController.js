@@ -105,10 +105,7 @@ class FreelancerController {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { id } = req.params;
-
-    const { name, email, active, cpf, phone } = await freelancer.update(
-      id,
+    const { id ,name, email, active, cpf, phone } = await freelancer.update(
       req.body
     );
 
