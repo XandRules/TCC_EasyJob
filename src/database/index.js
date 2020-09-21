@@ -6,6 +6,7 @@ import File from '../app/models/File';
 import Speciality from '../app/models/Speciality';
 import Announcements from '../app/models/Announcements';
 import Job from '../app/models/Job';
+import Address from '../app/models/Address';
 
 import databaseConfig from '../config/database';
 
@@ -16,6 +17,7 @@ const models = [
   Speciality,
   Announcements,
   Job,
+  Address,
 ];
 
 class Database {

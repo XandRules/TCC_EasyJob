@@ -9,6 +9,7 @@ import SpecialityController from './app/controllers/SpecialityController';
 import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 import JobController from './app/controllers/JobController';
+import AddressController from './app/controllers/AddressController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -17,17 +18,18 @@ const routes = new Router();
 const upload = multer(multerConfig);
 
 routes.post('/freelancers', FreelancerController.store);
+routes.post('/address', AddressController.store);
 routes.post('/establishment', EstablishmentController.store);
 routes.post('/sessionsfreelancer', SessionController.storeFreelancer);
 routes.post('/sessionsestablishment', SessionController.storeEstablishment);
+routes.get('/specialities', SpecialityController.index);
+routes.post('/specialities', SpecialityController.store);
 
 routes.use(authMiddleware);
 
 routes.get('/freelancers', FreelancerController.index);
 routes.get('/establishments', EstablishmentController.index);
 routes.put('/freelancers/:id', FreelancerController.update);
-routes.post('/specialities', SpecialityController.store);
-routes.get('/specialities', SpecialityController.index);
 routes.post('/announcement', AnnouncementController.store);
 routes.get('/announcements', AnnouncementController.index);
 routes.put('/announcements/:id', AnnouncementController.update);

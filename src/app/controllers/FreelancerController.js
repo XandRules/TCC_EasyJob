@@ -16,10 +16,11 @@ class FreelancerController {
       active: Yup.boolean().default(false),
       terms_of_use: Yup.boolean(),
       password: Yup.string().required().min(6),
+      speciality_id: Yup.number().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json('Validation fail');
+      return res.json('Validation fail');
     }
 
     const freelancerExists = await Freelancer.findOne({
@@ -27,15 +28,16 @@ class FreelancerController {
     });
 
     if (freelancerExists) {
-      return res.status(400).json({ error: 'Freelancer already exists.' });
+      return res.json({ error: 'Freelancer already exists.' });
     }
 
     let newFreelancer = null;
 
     try {
+      console.log(req.body);
       newFreelancer = await Freelancer.create(req.body);
     } catch (error) {
-      return res.status(401).json({ error: error.name });
+      return res.json({ error: error.name });
     }
 
     const { id, name, email, active, cpf, phone } = newFreelancer;

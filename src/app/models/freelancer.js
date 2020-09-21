@@ -19,6 +19,7 @@ class Freelancer extends Model {
         birth: Sequelize.STRING,
         active: Sequelize.STRING,
         terms_of_use: Sequelize.STRING,
+        speciality_id: Sequelize.NUMBER,
       },
       {
         sequelize,
