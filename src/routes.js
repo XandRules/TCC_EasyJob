@@ -17,6 +17,7 @@ const routes = new Router();
 
 const upload = multer(multerConfig);
 
+routes.get('/',FreelancerController.index);
 routes.post('/freelancers', FreelancerController.store);
 routes.post('/address', AddressController.store);
 routes.post('/establishment', EstablishmentController.store);
