@@ -1,1 +1,1 @@
-web: yarn start && yarn database
+web: npm start && npm database
