@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import express from 'express';
 import path from 'path';
 import routes from './routes';
@@ -13,8 +15,15 @@ class App {
   }
 
   middlewares() {
+    this.server.use(
+      cors({
+        origin: ['http://localhost:3000', process.env.APP_URL],
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        allowedHeaders: '*',
+        exposedHeaders: 'x-total-count',
+      })
+    );
     this.server.use(express.json());
-    this.server.use(cors());
     this.server.use(
       '/file',
       express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
