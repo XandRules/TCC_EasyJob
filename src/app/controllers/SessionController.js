@@ -12,11 +12,11 @@ class SessionController {
     const freelancer = await Freelancer.findOne({ where: { email } });
 
     if (!freelancer) {
-      return res.status(401).json({ error: 'Freelancer not found' });
+      return res.json({ error: 'Freelancer not found' });
     }
 
     if (!(await freelancer.checkPassword(password))) {
-      return res.status(401).json({ error: 'Password does not match' });
+      return res.json({ error: 'Password does not match' });
     }
 
     const { id, name } = freelancer;
@@ -42,11 +42,11 @@ class SessionController {
     const establishment = await Establishment.findOne({ where: { email } });
 
     if (!establishment) {
-      return res.status(401).json({ error: 'Establishment not found' });
+      return res.json({ error: 'Establishment not found' });
     }
 
     if (!(await establishment.checkPassword(password))) {
-      return res.status(401).json({ error: 'Password does not match' });
+      return res.json({ error: 'Password does not match' });
     }
 
     const { id, name } = establishment;
