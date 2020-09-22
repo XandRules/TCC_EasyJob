@@ -19,7 +19,7 @@ class App {
   middlewares() {
     this.server.use(
       cors({
-        origin: ['http://localhost:3000', process.env.APP_URL],
+        origin: ['https://easyjobapp.vercel.app/', process.env.APP_URL],
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         allowedHeaders: '*',
         exposedHeaders: 'x-total-count',
