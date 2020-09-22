@@ -21,11 +21,14 @@ class SessionController {
 
     const { id, name } = freelancer;
 
+    const role = 'freelancer';
+
     return res.json({
       freelancer: {
         id,
         name,
         email,
+        role,
       },
       token: jwt.sign({ id, email }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
@@ -48,11 +51,14 @@ class SessionController {
 
     const { id, name } = establishment;
 
+    const role = 'establish';
+
     return res.json({
       establishment: {
         id,
         name,
         email,
+        role,
       },
       token: jwt.sign({ id, email }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
