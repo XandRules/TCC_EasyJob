@@ -4,8 +4,7 @@
   "main": "server.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/server.js",
-    "database": "sequelize db:migrate"
+    "start": "nodemon src/server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
