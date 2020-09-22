@@ -34,11 +34,11 @@ class EstablishmentController {
       return res.status(401).json({ error: error.name });
     }
 
-    const { id, conpany_name, email, active, cnpj, phone } = newEstablishment;
+    const { id, company_name, email, active, cnpj, phone } = newEstablishment;
 
     return res.json({
       id,
-      conpany_name,
+      company_name,
       email,
       active,
       cnpj,
