@@ -7,6 +7,10 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      title: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       description: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -25,21 +29,30 @@ module.exports = {
       },
       freelancer_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'freelancers', key: 'id' },
+        references: {
+          model: 'freelancers',
+          key: 'id'
+        },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: false,
       },
       speciality_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'freelancers', key: 'id' },
+        references: {
+          model: 'specialities',
+          key: 'id'
+        },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: false,
       },
       file_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'files', key: 'id' },
+        references: {
+          model: 'files',
+          key: 'id'
+        },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,

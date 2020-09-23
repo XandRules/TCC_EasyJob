@@ -21,11 +21,14 @@ class AnnouncementsController {
     try {
       newAnnouncements = await Announcements.create(req.body);
     } catch (error) {
-      return res.status(401).json({ error });
+      return res.status(401).json({
+        error
+      });
     }
 
     const {
       id,
+      title,
       description,
       amount,
       day_of_week,
@@ -36,6 +39,7 @@ class AnnouncementsController {
 
     return res.json({
       id,
+      title,
       description,
       amount,
       day_of_week,
@@ -81,7 +85,9 @@ class AnnouncementsController {
     // return res.json(announcements);
 
     if (!announcements) {
-      return res.status(400).json({ error: 'Announcements not Found' });
+      return res.status(400).json({
+        error: 'Announcements not Found'
+      });
     }
 
     const {
@@ -107,7 +113,9 @@ class AnnouncementsController {
     const announcements = await Announcements.findByPk(req.params.id);
 
     if (!announcements) {
-      return res.status(400).json({ error: 'Announcements not Found' });
+      return res.status(400).json({
+        error: 'Announcements not Found'
+      });
     }
 
     const response = await announcements.delete();
