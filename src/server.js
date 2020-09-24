@@ -4,12 +4,20 @@ var http = require('https').createServer(app);
 var io = require('socket.io')(http);
 
 app.get('/', (req, res) => {
+<<<<<<< HEAD
   res.send("Servidor iniciado");
 })
 
 var clients = {};
 
 io.origins('https://easyjobapp.vercel.app');
+=======
+  res.send("Servidor iniciado com sucesso");
+})
+
+var clients = {};
+io.origins('*:*');
+>>>>>>> deploy
 
 io.on("connection", (client) => {
   client.on("join", (name) => {
