@@ -1,6 +1,7 @@
 import app from './app';
 
-import io from 'socket.io';
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 var clients = {};
 
