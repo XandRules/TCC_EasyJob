@@ -1,16 +1,21 @@
 import app from './app';
 
-var http = require('http').Server(app);
+var http = require('http').createServer(app);
 var io = require('socket.io')(http);
+
+app.get('/', (req, res) => {
+  res.send("Servidor iniciado");
+})
 
 var clients = {};
 
-io.on("connection", function (client) {
-  client.on("join", function (name) {
-    console.log("Joined: " + name);
+io.on("connection", (client) => {
+  client.on("join", (name) => {
+
+    console.log("joined" + name);
     clients[client.id] = name;
-    client.emit("update", "You have connected to the server.");
-    client.broadcast.emit("update", name + " has joined the server.")
+    client.emit("update", "You have connected to the server");
+    client.broadcast.emit("update", name + "has joined the server");
   });
 
   client.on("send", function (msg) {
@@ -23,6 +28,7 @@ io.on("connection", function (client) {
     io.emit("update", clients[client.id] + " has left the server.");
     delete clients[client.id];
   });
+
 });
 
 app.listen(process.env.PORT || 3333);
