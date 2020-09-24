@@ -9,6 +9,8 @@ app.get('/', (req, res) => {
 
 var clients = {};
 
+io.origins('https://easyjobapp.vercel.app');
+
 io.on("connection", (client) => {
   client.on("join", (name) => {
 
