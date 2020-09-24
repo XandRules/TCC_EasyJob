@@ -1,6 +1,6 @@
 import app from './app';
 
-var http = require('http').createServer(app);
+var http = require('https').createServer(app);
 var io = require('socket.io')(http);
 
 app.get('/', (req, res) => {
