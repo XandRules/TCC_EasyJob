@@ -1,4 +1,6 @@
-import { Router } from 'express';
+import {
+  Router
+} from 'express';
 import multer from 'multer';
 import multerConfig from './config/multer';
 
@@ -10,6 +12,7 @@ import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 import JobController from './app/controllers/JobController';
 import AddressController from './app/controllers/AddressController';
+import ChatController from './app/controllers/ChatController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -27,6 +30,7 @@ routes.post('/specialities', SpecialityController.store);
 
 routes.use(authMiddleware);
 
+routes.get('/chat', ChatController.index);
 routes.get('/freelancers', FreelancerController.index);
 routes.get('/establishments', EstablishmentController.index);
 routes.put('/freelancers/:id', FreelancerController.update);
