@@ -18,14 +18,18 @@ class App {
 
   middlewares() {
     this.server.use(
-      cors()
+      cors({
+        origin: ['https://easyjobapp.vercel.app', process.env.APP_URL],
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        allowedHeaders: '*',
+        exposedHeaders: 'x-total-count',
+      })
     );
     this.server.use(express.json());
     this.server.use(
       '/file',
       express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
     );
-    
   }
 
   routes() {
