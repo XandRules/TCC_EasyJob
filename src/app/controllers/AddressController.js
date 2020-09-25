@@ -4,50 +4,61 @@ import Address from '../models/Address';
 
 class AddressController {
   async store(req, res) {
-    const schema = Yup.object().shape({
-      public_place: Yup.string().required(),
-      neighborhood: Yup.string().required(),
-      uf: Yup.string().required(),
-      number: Yup.string().required(),
-      cep: Yup.string().required(),
-      city: Yup.string().required(),
-      freelancer_id: Yup.number().required(),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json('Validation fail');
-    }
-
-    let newAddress = null;
     try {
-      newAddress = await Address.create(req.body);
-    } catch (error) {
-      return res.json({
-        error
+      const schema = Yup.object().shape({
+        public_place: Yup.string().required(),
+        neighborhood: Yup.string().required(),
+        uf: Yup.string().required(),
+        number: Yup.string().required(),
+        cep: Yup.string().required(),
+        city: Yup.string().required(),
+        freelancer_id: Yup.number().required(),
       });
+
+      await schema.validate(req.body, {
+        abortEarly: false,
+      });
+      
+      let newAddress = null;
+      try {
+        newAddress = await Address.create(req.body);
+      } catch (error) {
+        return res.json({
+          error
+        });
+      }
+  
+      const {
+        id,
+        city,
+        number,
+        public_place,
+        neighborhood,
+        freelancer_id,
+        uf,
+        cep,
+      } = newAddress;
+  
+      return res.json({
+        id,
+        city,
+        number,
+        public_place,
+        neighborhood,
+        freelancer_id,
+        uf,
+        cep,
+      });
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        console.log(error);
+        return res.json({
+          "error": error
+        });
+      }
     }
 
-    const {
-      id,
-      city,
-      number,
-      public_place,
-      neighborhood,
-      freelancer_id,
-      uf,
-      cep,
-    } = newAddress;
 
-    return res.json({
-      id,
-      city,
-      number,
-      public_place,
-      neighborhood,
-      freelancer_id,
-      uf,
-      cep,
-    });
   }
 
   async index(req, res) {
