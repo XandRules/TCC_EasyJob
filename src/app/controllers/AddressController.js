@@ -4,24 +4,26 @@ import Address from '../models/Address';
 
 class AddressController {
   async store(req, res) {
-    // const schema = Yup.object().shape({
-    //   description: Yup.string().required(),
-    //   period: Yup.string().required(),
-    //   amount: Yup.string().required(),
-    //   day_of_week: Yup.string().required(),
-    //   freelancer_id: Yup.number().required(),
-    //   speciality_id: Yup.number().required(),
-    // });
+    const schema = Yup.object().shape({
+      public_place: Yup.string().required(),
+      neighborhood: Yup.string().required(),
+      uf: Yup.string().required(),
+      cep: Yup.string().required(),
+      city: Yup.string().required(),
+      freelancer_id: Yup.number().required(),
+    });
 
-    // if (!(await schema.isValid(req.body))) {
-    //   return res.status(400).json('Validation fail');
-    // }
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json('Validation fail');
+    }
 
     let newAddress = null;
     try {
       newAddress = await Address.create(req.body);
     } catch (error) {
-      return res.json({ error });
+      return res.json({
+        error
+      });
     }
 
     const {
@@ -86,7 +88,9 @@ class AddressController {
     // return res.json(address);
 
     if (!address) {
-      return res.json({ error: 'address not Found' });
+      return res.json({
+        error: 'address not Found'
+      });
     }
 
     const {
@@ -116,7 +120,9 @@ class AddressController {
     const address = await Address.findByPk(req.params.id);
 
     if (!address) {
-      return res.json({ error: 'address not Found' });
+      return res.json({
+        error: 'address not Found'
+      });
     }
 
     const response = await address.delete();
