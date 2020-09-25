@@ -54,7 +54,7 @@ class AddressController {
       atributes: [
         'id',
         'city',
-        'number',
+        /*'number',*/
         'public_place',
         'neighborhood',
         'freelancer_id',

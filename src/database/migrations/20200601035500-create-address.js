@@ -13,11 +13,15 @@ module.exports = {
       },
       neighborhood: {
         type: Sequelize.STRING,
-        allowNull: false,        
+        allowNull: false,
       },
       uf: {
         type: Sequelize.STRING,
-        allowNull: false,        
+        allowNull: false,
+      },
+      number: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       cep: {
         type: Sequelize.STRING,
@@ -29,7 +33,10 @@ module.exports = {
       },
       freelancer_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'freelancers', key: 'id' },
+        references: {
+          model: 'freelancers',
+          key: 'id'
+        },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: false,
