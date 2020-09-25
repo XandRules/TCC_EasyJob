@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
 import routes from './routes';
-import chat from './chat';
 import cors from 'cors';
 
 import './database';
@@ -15,7 +14,6 @@ class App {
     this.server = express();
     this.middlewares();
     this.routes();
-    chat();
   }
 
   middlewares() {

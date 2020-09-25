@@ -1,35 +1,37 @@
 import app from './app';
-
-var http = require('https').createServer(app);
+var app = require('express')();
+var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-app.get('/', (req, res) => {
-  res.send("Servidor iniciado com sucesso");
-})
+var clients = {}; 
 
-var clients = {};
-io.origins(['https://easyjobapp.vercel.app']);
+app.get('/', function(req, res){
+  res.send('server is running');
+});
 
-io.on("connection", (client) => {
-  client.on("join", (name) => {
+io.on("connection", function (client) {  
+    client.on("join", function(name){
+    	console.log("Joined: " + name);
+        clients[client.id] = name;
+        client.emit("update", "You have connected to the server.");
+        client.broadcast.emit("update", name + " has joined the server.")
+    });
 
-    console.log("joined" + name);
-    clients[client.id] = name;
-    client.emit("update", "You have connected to the server");
-    client.broadcast.emit("update", name + "has joined the server");
-  });
+    client.on("send", function(msg){
+    	console.log("Message: " + msg);
+        client.broadcast.emit("chat", clients[client.id], msg);
+    });
 
-  client.on("send", function (msg) {
-    console.log("Message: " + msg);
-    client.broadcast.emit("chat", clients[client.id], msg);
-  });
+    client.on("disconnect", function(){
+    	console.log("Disconnect");
+        io.emit("update", clients[client.id] + " has left the server.");
+        delete clients[client.id];
+    });
+});
 
-  client.on("disconnect", function () {
-    console.log("Disconnect");
-    io.emit("update", clients[client.id] + " has left the server.");
-    delete clients[client.id];
-  });
 
+http.listen(3001, function(){
+  console.log('listening on port 3001');
 });
 
 app.listen(3333);
