@@ -85,76 +85,77 @@ class FreelancerController {
   }
 
   async update(req, res) {
-    const schema = Yup.object().shape({
-      name: Yup.string(),
-      phone: Yup.string(),
-      gender: Yup.string(),
-      birth: Yup.string(),
-      bio: Yup.string(),
-      active: Yup.boolean(),
-      oldPassword: Yup.string().min(6),
-      avatar_id: Yup.number(),
-      password: Yup.string()
-        .min(6)
-        .when('oldPassword', (oldPassword, field) =>
-          oldPassword ? field.required() : field
+    try {
+      const schema = Yup.object().shape({
+        name: Yup.string(),
+        phone: Yup.string(),
+        gender: Yup.string(),
+        birth: Yup.string(),
+        bio: Yup.string(),
+        active: Yup.boolean(),
+        oldPassword: Yup.string().min(6),
+        avatar_id: Yup.number(),
+        password: Yup.string()
+          .min(6)
+          .when('oldPassword', (oldPassword, field) =>
+            oldPassword ? field.required() : field
+          ),
+        confirmPassword: Yup.string().when('password', (password, field) =>
+          password ? field.required().oneOf([Yup.ref('password')]) : field
         ),
-      confirmPassword: Yup.string().when('password', (password, field) =>
-        password ? field.required().oneOf([Yup.ref('password')]) : field
-      ),
-    });
+      });
 
-    if (!(await schema.isValid(req.body))) {
-      let errorsValidation = [];
-      schema.validate({})
-        .catch(function (e) {
-          console.log(e);
-          errorsValidation.push(e);
+      await schema.validate(req.body, {
+        abortEarly: false,
+      });
+
+      const {
+        oldPassword
+      } = req.body;
+
+      const freelancer = await Freelancer.findByPk(req.params.id);
+
+      if (!freelancer) {
+        return res.status(404).json({
+          error: 'User not Found'
         });
+      }
 
-      return res.status(400).json({
-        'errors': errosValidation
+      if (oldPassword && !(await freelancer.checkPassword(oldPassword))) {
+        return res.status(401).json({
+          error: 'Password does not match'
+        });
+      }
+
+      const {
+        id,
+        name,
+        email,
+        active,
+        cpf,
+        phone
+      } = await freelancer.update(
+        req.body
+      );
+
+      return res.json({
+        id,
+        name,
+        email,
+        active,
+        cpf,
+        phone,
       });
 
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        console.log(error);
+        return res.json({
+          "error": error
+        });
+      }
     }
 
-    const {
-      oldPassword
-    } = req.body;
-
-    const freelancer = await Freelancer.findByPk(req.params.id);
-
-    if (!freelancer) {
-      return res.status(404).json({
-        error: 'User not Found'
-      });
-    }
-
-    if (oldPassword && !(await freelancer.checkPassword(oldPassword))) {
-      return res.status(401).json({
-        error: 'Password does not match'
-      });
-    }
-
-    const {
-      id,
-      name,
-      email,
-      active,
-      cpf,
-      phone
-    } = await freelancer.update(
-      req.body
-    );
-
-    return res.json({
-      id,
-      name,
-      email,
-      active,
-      cpf,
-      phone,
-    });
   }
 }
 
