@@ -105,7 +105,12 @@ class FreelancerController {
     });
 
     if (!(await schema.isValid(req.body))) {
+      schema.validate({})
+        .catch(function (e) {
+          console.log(e);
+        });
       return res.status(400).json('Validation fail');
+
     }
 
     const {
