@@ -105,11 +105,16 @@ class FreelancerController {
     });
 
     if (!(await schema.isValid(req.body))) {
+      let errorsValidation = [];
       schema.validate({})
         .catch(function (e) {
           console.log(e);
+          errorsValidation.push(e);
         });
-      return res.status(400).json('Validation fail');
+
+      return res.status(400).json({
+        'errors': errosValidation
+      });
 
     }
 
