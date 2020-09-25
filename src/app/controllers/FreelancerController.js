@@ -91,7 +91,7 @@ class FreelancerController {
       gender: Yup.string(),
       birth: Yup.string(),
       bio: Yup.string(),
-      terms_of_use: Yup.boolean(),
+      active: Yup.boolean(),
       oldPassword: Yup.string().min(6),
       avatar_id: Yup.number(),
       password: Yup.string()
