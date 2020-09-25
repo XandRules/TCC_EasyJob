@@ -10,8 +10,7 @@ class FreelancerController {
       cpf: Yup.string().required(),
       phone: Yup.string().required(),
       gender: Yup.string().required(),
-      latitude: Yup.string(),
-      longitude: Yup.string(),
+      bio: Yup.string(),
       birth: Yup.string().required(),
       active: Yup.boolean().default(false),
       terms_of_use: Yup.boolean(),
@@ -24,11 +23,15 @@ class FreelancerController {
     }
 
     const freelancerExists = await Freelancer.findOne({
-      where: { email: req.body.email },
+      where: {
+        email: req.body.email
+      },
     });
 
     if (freelancerExists) {
-      return res.json({ error: 'Freelancer already exists.' });
+      return res.json({
+        error: 'Freelancer already exists.'
+      });
     }
 
     let newFreelancer = null;
@@ -37,10 +40,19 @@ class FreelancerController {
       console.log(req.body);
       newFreelancer = await Freelancer.create(req.body);
     } catch (error) {
-      return res.json({ error: error.name });
+      return res.json({
+        error: error.name
+      });
     }
 
-    const { id, name, email, active, cpf, phone } = newFreelancer;
+    const {
+      id,
+      name,
+      email,
+      active,
+      cpf,
+      phone
+    } = newFreelancer;
 
     return res.json({
       id,
@@ -54,7 +66,9 @@ class FreelancerController {
 
   async index(req, res) {
     const freelancer = await Freelancer.findAll({
-      where: { active: true },
+      where: {
+        active: true
+      },
       atributes: [
         'id',
         'name',
@@ -75,9 +89,8 @@ class FreelancerController {
       name: Yup.string(),
       phone: Yup.string(),
       gender: Yup.string(),
-      latitude: Yup.string(),
-      longitude: Yup.string(),
       birth: Yup.string(),
+      bio: Yup.string(),
       terms_of_use: Yup.boolean(),
       oldPassword: Yup.string().min(6),
       avatar_id: Yup.number(),
@@ -95,19 +108,32 @@ class FreelancerController {
       return res.status(400).json('Validation fail');
     }
 
-    const { oldPassword } = req.body;
+    const {
+      oldPassword
+    } = req.body;
 
     const freelancer = await Freelancer.findByPk(req.params.id);
 
     if (!freelancer) {
-      return res.status(404).json({ error: 'User not Found' });
+      return res.status(404).json({
+        error: 'User not Found'
+      });
     }
 
     if (oldPassword && !(await freelancer.checkPassword(oldPassword))) {
-      return res.status(401).json({ error: 'Password does not match' });
+      return res.status(401).json({
+        error: 'Password does not match'
+      });
     }
 
-    const { id ,name, email, active, cpf, phone } = await freelancer.update(
+    const {
+      id,
+      name,
+      email,
+      active,
+      cpf,
+      phone
+    } = await freelancer.update(
       req.body
     );
 

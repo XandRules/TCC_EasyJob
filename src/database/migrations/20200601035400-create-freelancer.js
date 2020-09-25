@@ -30,11 +30,7 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      latitude: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      longitude: {
+      bio: {
         type: Sequelize.STRING,
         allowNull: true,
       },
@@ -57,14 +53,20 @@ module.exports = {
       },
       avatar_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'files', key: 'id' },
+        references: {
+          model: 'files',
+          key: 'id'
+        },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
       },
       speciality_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'specialities', key: 'id' },
+        references: {
+          model: 'specialities',
+          key: 'id'
+        },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
