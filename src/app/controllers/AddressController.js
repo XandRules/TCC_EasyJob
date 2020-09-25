@@ -8,6 +8,7 @@ class AddressController {
       public_place: Yup.string().required(),
       neighborhood: Yup.string().required(),
       uf: Yup.string().required(),
+      number: Yup.string().required(),
       cep: Yup.string().required(),
       city: Yup.string().required(),
       freelancer_id: Yup.number().required(),
@@ -54,7 +55,7 @@ class AddressController {
       atributes: [
         'id',
         'city',
-        /*'number',*/
+        'number',
         'public_place',
         'neighborhood',
         'freelancer_id',
