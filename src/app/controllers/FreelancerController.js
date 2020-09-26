@@ -88,7 +88,7 @@ class FreelancerController {
 
     let id = req.body;
 
-    const freelancer = await Freelancer.findById({
+    const freelancer = await Freelancer.findAll({
       where: {
         id: req.params.id
       },

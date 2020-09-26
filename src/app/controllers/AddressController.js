@@ -62,7 +62,7 @@ class AddressController {
   }
 
   async indexById(req, res) {
-    const address = await Address.findById({
+    const address = await Address.findAll({
       where: {
         freelancer_id: req.params.id
       },
