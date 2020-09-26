@@ -61,7 +61,29 @@ class AddressController {
 
   }
 
+  async indexById(req, res) {
+    const address = await Address.findById({
+      where: {
+        freelancer_id: req.params.id
+      },
+      atributes: [
+        'id',
+        'city',
+        'cep',
+        'uf',
+        'public_place',
+        'neighborhood',
+        'number',
+      ],
+    });
+
+    return res.json(address);
+  }
+
   async index(req, res) {
+
+    let id = req.params.id;
+
     const address = await Address.findAll({
       atributes: [
         'id',

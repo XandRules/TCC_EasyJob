@@ -31,10 +31,12 @@ routes.post('/specialities', SpecialityController.store);
 routes.use(authMiddleware);
 
 routes.get('/address', AddressController.index);
+routes.get('/address/:id', AddressController.indexById);
 routes.get('/chat', ChatController.index);
 routes.get('/freelancers', FreelancerController.index);
 routes.get('/establishments', EstablishmentController.index);
 routes.put('/freelancers/:id', FreelancerController.update);
+routes.get('/freelancers/:id', FreelancerController.indexById);
 routes.post('/announcement', AnnouncementController.store);
 routes.get('/announcements', AnnouncementController.index);
 routes.put('/announcements/:id', AnnouncementController.update);

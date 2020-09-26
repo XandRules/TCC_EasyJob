@@ -84,6 +84,29 @@ class FreelancerController {
     return res.json(freelancer);
   }
 
+  async indexById(req, res) {
+
+    let id = req.body;
+
+    const freelancer = await Freelancer.findById({
+      where: {
+        id: req.params.id
+      },
+      atributes: [
+        'id',
+        'name',
+        'cpf',
+        'email',
+        'phone',
+        'avatar_id',
+        'gender',
+        'birth',
+      ],
+    });
+
+    return res.json(freelancer);
+  }
+
   async update(req, res) {
     try {
       const schema = Yup.object().shape({
