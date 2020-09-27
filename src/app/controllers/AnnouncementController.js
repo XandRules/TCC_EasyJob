@@ -68,7 +68,28 @@ class AnnouncementsController {
       atributes: [
         'id',
         'description',
+        'title',
         'amount',
+        'day_of_week',
+        'period',
+        'freelancer_id',
+        'speciality_id',
+      ],
+    });
+
+    return res.json(announcements);
+  }
+
+  async indexById(req, res) {
+    const announcements = await Announcements.findAll({
+      where: {
+        freelancer_id: req.params.id
+      },
+      atributes: [
+        'id',
+        'description',
+        'amount',
+        'title',
         'day_of_week',
         'period',
         'freelancer_id',

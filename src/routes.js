@@ -42,6 +42,7 @@ routes.post('/announcement', AnnouncementController.store);
 routes.get('/announcements', AnnouncementController.index);
 routes.put('/announcements/:id', AnnouncementController.update);
 routes.delete('/announcements/:id', AnnouncementController.delete);
+routes.get('/announcements/:id', AnnouncementController.indexById);
 routes.post('/jobs', JobController.store);
 routes.get('/jobs', JobController.index);
 
