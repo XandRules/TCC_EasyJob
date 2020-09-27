@@ -5,6 +5,7 @@ class Announcement extends Model {
     // migration de Establishment
     super.init(
       {
+        title: Sequelize.STRING,
         description: Sequelize.STRING,
         period: Sequelize.STRING,
         amount: Sequelize.STRING,

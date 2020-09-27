@@ -4,49 +4,62 @@ import Announcements from '../models/Announcements';
 
 class AnnouncementsController {
   async store(req, res) {
-    // const schema = Yup.object().shape({
-    //   description: Yup.string().required(),
-    //   period: Yup.string().required(),
-    //   amount: Yup.string().required(),
-    //   day_of_week: Yup.string().required(),
-    //   freelancer_id: Yup.number().required(),
-    //   speciality_id: Yup.number().required(),
-    // });
 
-    // if (!(await schema.isValid(req.body))) {
-    //   return res.status(400).json('Validation fail');
-    // }
-
-    let newAnnouncements = null;
     try {
-      newAnnouncements = await Announcements.create(req.body);
-    } catch (error) {
-      return res.status(401).json({
-        error
+      
+      const schema = Yup.object().shape({
+        description: Yup.string().required(),
+        period: Yup.string().required(),
+        amount: Yup.string().required(),
+        day_of_week: Yup.string().required(),
+        freelancer_id: Yup.number().required(),
+        speciality_id: Yup.number().required(),
       });
+
+      await schema.validate(req.body, {
+        abortEarly: false,
+      });
+
+
+      let newAnnouncements = null;
+      try {
+        newAnnouncements = await Announcements.create(req.body);
+      } catch (error) {
+        return res.status(401).json({
+          error
+        });
+      }
+  
+      const {
+        id,
+        title,
+        description,
+        amount,
+        day_of_week,
+        period,
+        freelancer_id,
+        speciality_id,
+      } = newAnnouncements;
+  
+      return res.json({
+        id,
+        title,
+        description,
+        amount,
+        day_of_week,
+        period,
+        freelancer_id,
+        speciality_id,
+      });
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        console.log(error);
+        return res.json({
+          "error": error
+        });
+      }      
     }
 
-    const {
-      id,
-      title,
-      description,
-      amount,
-      day_of_week,
-      period,
-      freelancer_id,
-      speciality_id,
-    } = newAnnouncements;
-
-    return res.json({
-      id,
-      title,
-      description,
-      amount,
-      day_of_week,
-      period,
-      freelancer_id,
-      speciality_id,
-    });
   }
 
   async index(req, res) {
