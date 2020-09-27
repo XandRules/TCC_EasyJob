@@ -10,6 +10,7 @@ class AnnouncementsController {
       const schema = Yup.object().shape({
         description: Yup.string().required(),
         period: Yup.string().required(),
+        title: Yup.string().required(),
         amount: Yup.string().required(),
         day_of_week: Yup.string().required(),
         freelancer_id: Yup.number().required(),
