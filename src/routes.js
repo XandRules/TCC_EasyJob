@@ -32,6 +32,7 @@ routes.use(authMiddleware);
 
 routes.get('/address', AddressController.index);
 routes.get('/address/:id', AddressController.indexById);
+routes.put('/address/:id', AddressController.update);
 routes.get('/chat', ChatController.index);
 routes.get('/freelancers', FreelancerController.index);
 routes.get('/establishments', EstablishmentController.index);
