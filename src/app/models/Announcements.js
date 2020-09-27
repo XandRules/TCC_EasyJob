@@ -10,6 +10,7 @@ class Announcement extends Model {
         period: Sequelize.STRING,
         amount: Sequelize.STRING,
         day_of_week: Sequelize.STRING,
+        city: Sequelize.STRING,
       },
       {
         sequelize,

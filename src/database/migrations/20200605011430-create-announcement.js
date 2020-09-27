@@ -23,6 +23,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      city: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       day_of_week: {
         type: Sequelize.STRING,
         allowNull: false,
