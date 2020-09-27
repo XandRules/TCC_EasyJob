@@ -1,2 +1,2 @@
-web: npm start
-server: npm sequelize-cli db:migrate
+web: yarn start
+server: yarn sequelize-cli db:migrate
