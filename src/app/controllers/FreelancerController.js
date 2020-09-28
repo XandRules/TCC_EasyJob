@@ -196,16 +196,15 @@ class FreelancerController {
       const address = await Address.findByPk(req.params.id);
 
       if (!address) {
-        return res.status(400).json({
-          error: 'address not Found'
+        console.log('address not Found');
+
+      } else {
+        response = await Address.destroy({
+          where: {
+            freelancer_id: req.params.id
+          }
         });
       }
-
-      response = await Address.destroy({
-        where: {
-          freelancer_id: req.params.id
-        }
-      });
 
       const response = await Freelancer.destroy({
         where: {
