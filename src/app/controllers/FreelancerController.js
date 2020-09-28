@@ -201,7 +201,7 @@ class FreelancerController {
         });
       }
 
-      const response = await Announcements.destroy({
+      response = await Announcements.destroy({
         where: {
           freelancer_id: req.params.id
         }
