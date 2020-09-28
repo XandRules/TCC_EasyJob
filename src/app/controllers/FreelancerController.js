@@ -192,7 +192,11 @@ class FreelancerController {
         });
       }
 
-      const response = await freelancer.delete();
+      const response = await Freelancer.destroy({
+        where: {
+          id: req.params.id
+        }
+      });
 
       return res.json(response);
 
