@@ -159,9 +159,15 @@ class AnnouncementsController {
       });
     }
 
-    const response = await announcements.delete();
+    try {
+      const response = await announcements.delete();
+  
+      return res.json(response);
+      
+    } catch (error) {
+      return res.json({error: error});
+    }
 
-    return res.json(response);
   }
 }
 
