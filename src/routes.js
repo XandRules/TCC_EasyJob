@@ -12,7 +12,7 @@ import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 import JobController from './app/controllers/JobController';
 import AddressController from './app/controllers/AddressController';
-import ChatController from './app/controllers/ChatController';
+import MailController from './app/controllers/MailController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -26,6 +26,7 @@ routes.post('/establishment', EstablishmentController.store);
 routes.post('/sessionsfreelancer', SessionController.storeFreelancer);
 routes.post('/sessionsestablishment', SessionController.storeEstablishment);
 routes.get('/specialities', SpecialityController.index);
+routes.post('/mail', MailController.sendMail);
 routes.post('/specialities', SpecialityController.store);
 
 routes.use(authMiddleware);
@@ -33,7 +34,7 @@ routes.use(authMiddleware);
 routes.get('/address', AddressController.index);
 routes.get('/address/:id', AddressController.indexById);
 routes.put('/address/:id', AddressController.update);
-routes.get('/chat', ChatController.index);
+// routes.get('/chat', ChatController.index);
 routes.get('/freelancers', FreelancerController.index);
 routes.get('/establishments', EstablishmentController.index);
 routes.put('/freelancers/:id', FreelancerController.update);
