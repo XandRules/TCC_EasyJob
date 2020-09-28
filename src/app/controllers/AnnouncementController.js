@@ -152,7 +152,7 @@ class AnnouncementsController {
 
   async delete(req, res) {
 
-    try {
+    try { 
       const announcements = await Announcements.findByPk(req.params.id);
 
       if (!announcements) {
