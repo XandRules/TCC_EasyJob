@@ -6,7 +6,7 @@ class AnnouncementsController {
   async store(req, res) {
 
     try {
-      
+
       const schema = Yup.object().shape({
         description: Yup.string().required(),
         period: Yup.string().required(),
@@ -31,7 +31,7 @@ class AnnouncementsController {
           error
         });
       }
-  
+
       const {
         id,
         title,
@@ -43,7 +43,7 @@ class AnnouncementsController {
         freelancer_id,
         speciality_id,
       } = newAnnouncements;
-  
+
       return res.json({
         id,
         title,
@@ -61,7 +61,7 @@ class AnnouncementsController {
         return res.json({
           "error": error
         });
-      }      
+      }
     }
 
   }
@@ -152,7 +152,7 @@ class AnnouncementsController {
 
   async delete(req, res) {
 
-    try { 
+    try {
       const announcements = await Announcements.findByPk(req.params.id);
 
       if (!announcements) {
@@ -161,12 +161,18 @@ class AnnouncementsController {
         });
       }
 
-      const response = await announcements.delete();
-  
+      const response = await Announcements.destroy({
+        where: {
+          id: req.params.id
+        }
+      });
+
       return res.json(response);
-      
+
     } catch (error) {
-      return res.json({"error": error});
+      return res.json({
+        "error": error
+      });
     }
 
   }

@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 
 import Freelancer from '../models/freelancer';
+import Announcements from '../models/Announcements';
 
 class FreelancerController {
   async store(req, res) {
@@ -191,6 +192,20 @@ class FreelancerController {
           error: 'freelancer not Found'
         });
       }
+
+      const announcements = await Announcements.findByPk(req.params.id);
+
+      if (!announcements) {
+        return res.status(400).json({
+          error: 'Announcements not Found'
+        });
+      }
+
+      const response = await Announcements.destroy({
+        where: {
+          freelancer_id: req.params.id
+        }
+      });
 
       const response = await Freelancer.destroy({
         where: {
