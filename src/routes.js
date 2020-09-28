@@ -38,6 +38,7 @@ routes.put('/address/:id', AddressController.update);
 routes.get('/freelancers', FreelancerController.index);
 routes.get('/establishments', EstablishmentController.index);
 routes.put('/freelancers/:id', FreelancerController.update);
+routes.delete('/freelancers/:id', FreelancerController.delete);
 routes.get('/freelancers/:id', FreelancerController.indexById);
 routes.post('/announcement', AnnouncementController.store);
 routes.get('/announcements', AnnouncementController.index);

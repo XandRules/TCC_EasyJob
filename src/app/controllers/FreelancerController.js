@@ -180,6 +180,29 @@ class FreelancerController {
     }
 
   }
+
+  async delete(req, res) {
+
+    try {
+      const freelancer = await Freelancer.findByPk(req.params.id);
+
+      if (!freelancer) {
+        return res.json({
+          error: 'freelancer not Found'
+        });
+      }
+
+      const response = await freelancer.delete();
+
+      return res.json(response);
+
+    } catch (error) {
+      return res.json({
+        error: error
+      });
+    }
+
+  }
 }
 
 export default new FreelancerController();
