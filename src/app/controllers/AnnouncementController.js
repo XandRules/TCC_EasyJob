@@ -151,21 +151,22 @@ class AnnouncementsController {
   }
 
   async delete(req, res) {
-    const announcements = await Announcements.findByPk(req.params.id);
-
-    if (!announcements) {
-      return res.status(400).json({
-        error: 'Announcements not Found'
-      });
-    }
 
     try {
+      const announcements = await Announcements.findByPk(req.params.id);
+
+      if (!announcements) {
+        return res.status(400).json({
+          error: 'Announcements not Found'
+        });
+      }
+
       const response = await announcements.delete();
   
       return res.json(response);
       
     } catch (error) {
-      return res.json({error: error});
+      return res.json({"error": error});
     }
 
   }
