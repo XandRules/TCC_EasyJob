@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 import Freelancer from '../models/freelancer';
-import Announcements from '../models/Announcements';
+import Address from '../models/Address';
 
 class FreelancerController {
   async store(req, res) {
@@ -193,15 +193,15 @@ class FreelancerController {
         });
       }
 
-      const announcements = await Announcements.findByPk(req.params.id);
+      const address = await Address.findByPk(req.params.id);
 
-      if (!announcements) {
+      if (!address) {
         return res.status(400).json({
-          error: 'Announcements not Found'
+          error: 'address not Found'
         });
       }
 
-      response = await Announcements.destroy({
+      response = await Address.destroy({
         where: {
           freelancer_id: req.params.id
         }
