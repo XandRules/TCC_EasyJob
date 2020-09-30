@@ -30,6 +30,10 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      bio: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
       active: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
@@ -41,7 +45,10 @@ module.exports = {
       },
       avatar_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'files', key: 'id' },
+        references: {
+          model: 'files',
+          key: 'id'
+        },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,

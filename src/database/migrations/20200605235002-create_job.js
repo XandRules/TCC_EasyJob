@@ -29,21 +29,30 @@ module.exports = {
       },
       freelancer_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'freelancers', key: 'id' },
+        references: {
+          model: 'freelancers',
+          key: 'id'
+        },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
       },
       establishment_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'establishments', key: 'id' },
+        references: {
+          model: 'establishments',
+          key: 'id'
+        },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
       },
       announcement_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'announcements', key: 'id' },
+        references: {
+          model: 'announcements',
+          key: 'id'
+        },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,

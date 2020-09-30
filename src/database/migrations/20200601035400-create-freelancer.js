@@ -31,7 +31,7 @@ module.exports = {
         unique: true,
       },
       bio: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: true,
       },
       birth: {
