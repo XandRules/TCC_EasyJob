@@ -25,6 +25,11 @@ class Address extends Model {
       foreignKey: 'freelancer_id',
       as: 'freelancer',
     });
+
+    this.belongsTo(models.Establishment, {
+      foreignKey: 'establish_id',
+      as: 'establish',
+    });
   }
 
 }

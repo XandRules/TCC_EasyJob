@@ -38,8 +38,18 @@ module.exports = {
           key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: false,
+        onDelete: 'CASCADE',
+        allowNull: true,
+      },
+      establish: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'establish',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,

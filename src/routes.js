@@ -32,7 +32,8 @@ routes.post('/specialities', SpecialityController.store);
 routes.use(authMiddleware);
 
 routes.get('/address', AddressController.index);
-routes.get('/address/:id', AddressController.indexById);
+routes.get('/address/freelancer/:id', AddressController.freelancerAddress);
+routes.get('/address/establish/:id', AddressController.establishAddress);
 routes.put('/address/:id', AddressController.update);
 // routes.get('/chat', ChatController.index);
 routes.get('/freelancers', FreelancerController.index);

@@ -12,7 +12,8 @@ class AddressController {
         number: Yup.string().required(),
         cep: Yup.string().required(),
         city: Yup.string().required(),
-        freelancer_id: Yup.number().required(),
+        freelancer_id: Yup.number(),
+        establish_id: Yup.number(),
       });
 
       await schema.validate(req.body, {
@@ -35,6 +36,7 @@ class AddressController {
         public_place,
         neighborhood,
         freelancer_id,
+        establish_id,
         uf,
         cep,
       } = newAddress;
@@ -46,6 +48,7 @@ class AddressController {
         public_place,
         neighborhood,
         freelancer_id,
+        establish_id,
         uf,
         cep,
       });
@@ -61,10 +64,31 @@ class AddressController {
 
   }
 
-  async indexById(req, res) {
+  async freelancerAddress(req, res) {
+
     const address = await Address.findAll({
-      where: {
-        freelancer_id: req.params.id
+      where: {       
+          freelancer_id: req.params.freelancer_id
+        },
+      atributes: [
+        'id',
+        'city',
+        'cep',
+        'uf',
+        'public_place',
+        'neighborhood',
+        'number',
+      ],
+    });
+
+    return res.json(address);
+  }
+
+  async establishAddress(req, res) {
+
+    const address = await Address.findAll({
+      where: {       
+          establish_id: req.params.id
       },
       atributes: [
         'id',
@@ -76,6 +100,7 @@ class AddressController {
         'number',
       ],
     });
+    //maria ivone ribeiro
 
     return res.json(address);
   }
@@ -92,6 +117,7 @@ class AddressController {
         'public_place',
         'neighborhood',
         'freelancer_id',
+        'establish_id',
         'uf',
         'cep',
       ],
@@ -107,6 +133,7 @@ class AddressController {
       public_place: Yup.string(),
       neighborhood: Yup.string(),
       freelancer_id: Yup.number(),
+      establish_id:Yup.number(),
       cep: Yup.string(),
       uf: Yup.string(),
     });
@@ -134,6 +161,7 @@ class AddressController {
       public_place,
       neighborhood,
       freelancer_id,
+      establish_id,
       uf,
       cep,
     } = await address.update(req.body);
@@ -145,6 +173,7 @@ class AddressController {
       public_place,
       neighborhood,
       freelancer_id,
+      establish_id,
       uf,
       cep,
     });
