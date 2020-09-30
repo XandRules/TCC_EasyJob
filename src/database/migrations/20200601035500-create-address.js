@@ -41,10 +41,10 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: true,
       },
-      establish: {
+      establish_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'establishment',
+          model: 'establishments',
           key: 'id'
         },
         onUpdate: 'CASCADE',
