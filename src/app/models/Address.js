@@ -28,7 +28,7 @@ class Address extends Model {
 
     this.belongsTo(models.Establishment, {
       foreignKey: 'establish_id',
-      as: 'establish',
+      as: 'establishment',
     });
   }
 

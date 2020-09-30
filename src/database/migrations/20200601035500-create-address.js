@@ -44,7 +44,7 @@ module.exports = {
       establish: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'establish',
+          model: 'establishment',
           key: 'id'
         },
         onUpdate: 'CASCADE',
