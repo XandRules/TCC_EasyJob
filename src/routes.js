@@ -43,9 +43,9 @@ routes.delete('/freelancers/:id', FreelancerController.delete);
 routes.get('/freelancers/:id', FreelancerController.indexById);
 routes.post('/announcement', AnnouncementController.store);
 routes.get('/announcements', AnnouncementController.index);
+routes.get('/announcements/:id', AnnouncementController.indexById);
 routes.put('/announcements/:id', AnnouncementController.update);
 routes.delete('/announcements/:id', AnnouncementController.delete);
-routes.get('/announcements/:id', AnnouncementController.indexById);
 routes.post('/jobs', JobController.store);
 routes.get('/jobs', JobController.index);
 
