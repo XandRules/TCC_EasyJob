@@ -106,48 +106,58 @@ class AnnouncementsController {
   }
 
   async update(req, res) {
-    const schema = Yup.object().shape({
-      description: Yup.string(),
-      period: Yup.string(),
-      amount: Yup.string(),
-      city: Yup.string(),
-      day_of_week: Yup.string(),
-      speciality_id: Yup.number(),
-    });
 
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json('Validation fail');
-    }
-
-    // console.log(req.body);
-
-    const announcements = await Announcements.findByPk(req.params.id);
-
-    // return res.json(announcements);
-
-    if (!announcements) {
-      return res.status(400).json({
-        error: 'Announcements not Found'
+    try {
+      const schema = Yup.object().shape({
+        description: Yup.string(),
+        period: Yup.string(),
+        amount: Yup.string(),
+        city: Yup.string(),
+        day_of_week: Yup.string(),
+        speciality_id: Yup.number(),
       });
+  
+      await schema.validate(req.body, {
+        abortEarly: false,
+      });   
+  
+      const announcements = await Announcements.findByPk(req.params.id);
+  
+      // return res.json(announcements);
+  
+      if (!announcements) {
+        return res.status(400).json({
+          error: 'Announcements not Found'
+        });
+      }  
+      const {
+        id,
+        description,
+        period,
+        amount,
+        day_of_week,
+        speciality_id,
+      } = await announcements.update(req.body);
+  
+      return res.json({
+        id,
+        description,
+        period,
+        amount,
+        day_of_week,
+        speciality_id,
+      });
+      
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        console.log(error);
+        return res.json({
+          "error": error
+        });
+      }
     }
 
-    const {
-      id,
-      description,
-      period,
-      amount,
-      day_of_week,
-      speciality_id,
-    } = await announcements.update(req.body);
 
-    return res.json({
-      id,
-      description,
-      period,
-      amount,
-      day_of_week,
-      speciality_id,
-    });
   }
 
   async delete(req, res) {
