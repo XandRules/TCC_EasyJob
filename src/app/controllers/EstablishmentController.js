@@ -70,6 +70,31 @@ class EstablishmentController {
     return res.json(establishment);
   }
 
+  async indexById(req, res) {
+    const establishment = await Establishment.findAll({
+      where: {
+        active: true
+      },
+      atributes: ['id', 'company_name', 'cnpj', 'email', 'phone', 'avatar_id'],
+    });
+
+    return res.json(establishment);
+  }
+
+  async indexById(req, res) {
+
+    let id = req.body;
+
+    const establishment = await Establishment.findAll({
+      where: {
+        id: req.params.id
+      },
+      atributes: ['id', 'company_name', 'cnpj', 'email', 'phone', 'avatar_id'],
+    });
+
+    return res.json(establishment);
+  }
+
   async update(req, res) {
     const schema = Yup.object().shape({
       conpany_name: Yup.string(),
