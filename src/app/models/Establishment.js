@@ -8,8 +8,10 @@ class Establishment extends Model {
     super.init(
       {
         company_name: Sequelize.STRING,
+        social_reason: Sequelize.STRING,
         email: Sequelize.STRING,
         cnpj: Sequelize.STRING,
+        bio: Sequelize.STRING,
         phone: Sequelize.STRING,
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,

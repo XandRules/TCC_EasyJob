@@ -6,8 +6,10 @@ class EstablishmentController {
   async store(req, res) {
     const schema = Yup.object().shape({
       company_name: Yup.string().required(),
+      social_reason: Yup.string().required(),
       email: Yup.string().email().required(),
       cnpj: Yup.string().required(),
+      bio: Yup.string(),
       phone: Yup.string().required(),
       active: Yup.boolean().default(false),
       terms_of_use: Yup.boolean(),
@@ -43,6 +45,7 @@ class EstablishmentController {
     const {
       id,
       company_name,
+      social_reason,
       email,
       active,
       cnpj,
@@ -52,6 +55,7 @@ class EstablishmentController {
     return res.json({
       id,
       company_name,
+      social_reason,
       email,
       active,
       cnpj,
@@ -64,18 +68,7 @@ class EstablishmentController {
       where: {
         active: true
       },
-      atributes: ['id', 'company_name', 'cnpj', 'email', 'phone', 'avatar_id'],
-    });
-
-    return res.json(establishment);
-  }
-
-  async indexById(req, res) {
-    const establishment = await Establishment.findAll({
-      where: {
-        active: true
-      },
-      atributes: ['id', 'company_name', 'cnpj', 'email', 'phone', 'avatar_id'],
+      atributes: ['id', 'company_name', 'social_reason','cnpj', 'email', 'phone', 'avatar_id'],
     });
 
     return res.json(establishment);
@@ -89,7 +82,7 @@ class EstablishmentController {
       where: {
         id: req.params.id
       },
-      atributes: ['id', 'company_name', 'cnpj', 'email', 'phone', 'avatar_id'],
+      atributes: ['id', 'company_name','social_reason', 'cnpj', 'email', 'phone', 'avatar_id'],
     });
 
     return res.json(establishment);
@@ -97,10 +90,11 @@ class EstablishmentController {
 
   async update(req, res) {
     const schema = Yup.object().shape({
-      conpany_name: Yup.string(),
-      email: Yup.string(),
+      company_name: Yup.string(),
+      social_reason: Yup.string(),   
       phone: Yup.string(),
-      terms_of_use: Yup.boolean(),
+      bio: Yup.string(),
+      active: Yup.boolean(),
       oldPassword: Yup.string().min(6),
       avatar_id: Yup.integer(),
       password: Yup.string()
