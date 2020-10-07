@@ -1,6 +1,6 @@
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
-import Establishment from '../models/Establishment';
+import Establishment from "../models/Establishment";
 
 class EstablishmentController {
   async store(req, res) {
@@ -17,18 +17,18 @@ class EstablishmentController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json('Validation fail');
+      return res.status(400).json("Validation fail");
     }
 
     const establishmentExists = await Establishment.findOne({
       where: {
-        email: req.body.email
+        email: req.body.email,
       },
     });
 
     if (establishmentExists) {
       return res.status(400).json({
-        error: 'Establishment already exists.'
+        error: "Establishment already exists.",
       });
     }
 
@@ -38,7 +38,7 @@ class EstablishmentController {
       newEstablishment = await Establishment.create(req.body);
     } catch (error) {
       return res.status(401).json({
-        error: error.name
+        error: error.name,
       });
     }
 
@@ -49,7 +49,7 @@ class EstablishmentController {
       email,
       active,
       cnpj,
-      phone
+      phone,
     } = newEstablishment;
 
     return res.json({
@@ -62,101 +62,115 @@ class EstablishmentController {
       phone,
     });
   }
-  
 
   async index(req, res) {
     const establishment = await Establishment.findAll({
       where: {
-        active: true
+        active: true,
       },
-      atributes: ['id', 'company_name', 'social_reason','cnpj', 'email', 'phone', 'avatar_id'],
+      atributes: [
+        "id",
+        "company_name",
+        "social_reason",
+        "cnpj",
+        "email",
+        "phone",
+        "avatar_id",
+      ],
     });
 
     return res.json(establishment);
   }
 
   async indexById(req, res) {
-
     let id = req.body;
 
     const establishment = await Establishment.findAll({
       where: {
-        id: req.params.id
+        id: req.params.id,
       },
-      atributes: ['id', 'company_name','social_reason', 'cnpj', 'email', 'phone', 'avatar_id'],
+      atributes: [
+        "id",
+        "company_name",
+        "social_reason",
+        "cnpj",
+        "email",
+        "phone",
+        "avatar_id",
+      ],
     });
 
     return res.json(establishment);
   }
 
   async update(req, res) {
-    const schema = Yup.object().shape({
-      company_name: Yup.string(),
-      social_reason: Yup.string(),   
-      phone: Yup.string(),
-      bio: Yup.string(),
-      active: Yup.boolean(),
-      oldPassword: Yup.string().min(6),
-      avatar_id: Yup.integer(),
-      password: Yup.string()
-        .min(6)
-        .when('oldPassword', (oldPassword, field) =>
-          oldPassword ? field.required() : field
+    try {
+      const schema = Yup.object().shape({
+        company_name: Yup.string(),
+        social_reason: Yup.string(),
+        phone: Yup.string(),
+        bio: Yup.string(),
+        active: Yup.boolean(),
+        oldPassword: Yup.string().min(6),
+        avatar_id: Yup.integer(),
+        password: Yup.string()
+          .min(6)
+          .when("oldPassword", (oldPassword, field) =>
+            oldPassword ? field.required() : field
+          ),
+        confirmPassword: Yup.string().when("password", (password, field) =>
+          password ? field.required().oneOf([Yup.ref("password")]) : field
         ),
-      confirmPassword: Yup.string().when('password', (password, field) =>
-        password ? field.required().oneOf([Yup.ref('password')]) : field
-      ),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json('Validation fail');
-    }
-
-    const {
-      email,
-      oldPassword
-    } = req.body;
-
-    const establishment = await Establishment.findByPk(req.userId);
-
-    if (email !== establishment.email) {
-      const establishmentExists = await Establishment.findOne({
-        where: {
-          email
-        },
       });
 
-      if (establishmentExists) {
-        return res.status(400).json({
-          error: 'Establishment already exists.'
+      await schema.validate(req.body, {
+        abortEarly: false,
+      });
+
+      const { email, oldPassword } = req.body;
+
+      const establishment = await Establishment.findByPk(req.userId);
+
+      if (email !== establishment.email) {
+        const establishmentExists = await Establishment.findOne({
+          where: {
+            email,
+          },
+        });
+
+        if (establishmentExists) {
+          return res.status(400).json({
+            error: "Establishment already exists.",
+          });
+        }
+      }
+
+      if (oldPassword && !(await establishment.checkPassword(oldPassword))) {
+        return res.status(401).json({
+          error: "Password does not match",
+        });
+      }
+
+      const { id, name, active, cpf, phone } = await establishment.update(
+        req.body
+      );
+
+      return res.json({
+        id,
+        name,
+        email,
+        active,
+        cpf,
+        phone,
+      });
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        console.log(error);
+        return res.json({
+          error: error,
         });
       }
     }
-
-    if (oldPassword && !(await establishment.checkPassword(oldPassword))) {
-      return res.status(401).json({
-        error: 'Password does not match'
-      });
-    }
-
-    const {
-      id,
-      name,
-      active,
-      cpf,
-      phone
-    } = await establishment.update(
-      req.body
-    );
-
-    return res.json({
-      id,
-      name,
-      email,
-      active,
-      cpf,
-      phone,
-    });
   }
 }
 
