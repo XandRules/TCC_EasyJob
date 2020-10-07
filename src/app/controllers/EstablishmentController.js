@@ -62,6 +62,7 @@ class EstablishmentController {
       phone,
     });
   }
+  
 
   async index(req, res) {
     const establishment = await Establishment.findAll({
