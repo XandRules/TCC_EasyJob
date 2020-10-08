@@ -36,7 +36,7 @@ routes.put("/address/:id", AddressController.update);
 // routes.get('/chat', ChatController.index);
 routes.get("/establishments", EstablishmentController.index);
 routes.get("/establishments/:id", EstablishmentController.indexById);
-routes.post("/establishments/:id", EstablishmentController.update);
+routes.put("/establishments/:id", EstablishmentController.update);
 routes.get("/freelancers", FreelancerController.index);
 routes.put("/freelancers/:id", FreelancerController.update);
 routes.delete("/freelancers/:id", FreelancerController.delete);
