@@ -193,25 +193,56 @@ class AnnouncementsController {
   async findAnnouncemetFromFreelancer(req, res) {
 
     try {
-      const announcements = await Announcements.findAll({
-        raw: true,
-        attributes: atributes,
-        include:[{
-          model: Freelancer,
-          model: Specialities,
-          required : true,
-        }],
-        where: {
-          id: req.params.id
-        }
-      });
+
+      const announcements = await Announcements.findByPk(req.params.id);
+     
+      // const announcements = await Announcements.findAll({
+      //   raw: true,
+      //   attributes: atributes,
+      //   include:[{
+      //     model: Freelancer,
+      //     model: Specialities,
+      //     required : true,
+      //   }],
+      //   where: {
+      //     id: req.params.id
+      //   }
+      // });
 
 
       if(!announcements){
         return res.json('Anuncio não encontrado');
+      }else{
+        const freelancers = await Freelancer.findByPk(announcements.freelancer_id);
+
+        if(!freelancers){
+          return res.json('freelancer não encontrado');
+        }else{
+          const specialities = await Specialities.findByPk(freelancers.speciality_id);
+
+          if(!specialities){
+            return res.json('especialidade não encontrada');
+          }
+        }
+
       }
 
-      return res.json(announcements);
+      const { title, description, period, amount, city, day_of_week} = announcements;
+      const { bio, name } = freelancers;
+      const {speciality_function} = specialities;
+
+      return res.json({
+        title,
+        description,
+        period,
+        amount,
+        city,
+        day_of_week,
+        speciality_id,
+        bio,
+        name,
+        speciality_function,
+      });
 
 
     } catch (error) {
