@@ -5,13 +5,13 @@ var io = require('socket.io')(http);
 
 var clients = {}; 
 
-app.get('/newchat', function(req, res){
+app.get('/newchat/:room', function(req, res){
 
   io.on("connection", client =>{
       client.join(req.params);
   })
     
-  return res.send('server is running');
+  return res.json({room : `server is running ${req.params}`});
 });
 
 io.on("connection", function (client) {  
