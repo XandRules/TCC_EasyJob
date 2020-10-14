@@ -199,8 +199,8 @@ class AnnouncementsController {
       const { title, description, period, amount, city, day_of_week} = announcements;
       const freelancers = await Freelancer.findByPk(announcements.freelancer_id);
       const { bio, name } = freelancers;
-      const specialities = await Specialities.findByPk(freelancers.speciality_id);
-      // const {speciality_function} = specialities;
+      const specialities = await Specialities.findByPk(announcements.speciality_id);
+       const {id , speciality_function} = specialities;
 
 
       if(!announcements){
@@ -227,7 +227,8 @@ class AnnouncementsController {
         city,
         day_of_week,
         bio,
-        name
+        name,
+        speciality_function
       });
 
 
