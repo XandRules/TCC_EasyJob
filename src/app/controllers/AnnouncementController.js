@@ -1,6 +1,8 @@
 import * as Yup from 'yup';
 
 import Announcements from '../models/Announcements';
+import Freelancer from '../models/freelancer';
+import Specialities from '../models/Speciality';
 
 class AnnouncementsController {
   async store(req, res) {
@@ -186,6 +188,41 @@ class AnnouncementsController {
     }
 
   }
-}
+
+
+  async findAnnouncemetFromFreelancer(req, res) {
+
+    try {
+      const announcements = await Announcements.findAll({
+        raw: true,
+        attributes: atributes,
+        include:[{
+          model: Freelancer,
+          model: Specialities,
+          required : true,
+        }],
+        where: {
+          id: req.params.id
+        }
+      });
+
+
+      if(!announcements){
+        return res.json('Anuncio não encontrado');
+      }
+
+      return res.json(announcements);
+
+
+    } catch (error) {
+      return res.json({
+        "error": error
+      });
+    }
+
+  }
+
+
+};
 
 export default new AnnouncementsController();
