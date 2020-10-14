@@ -196,23 +196,11 @@ class AnnouncementsController {
 
       const announcements = await Announcements.findByPk(req.params.id);
      
-      // const announcements = await Announcements.findAll({
-      //   raw: true,
-      //   attributes: atributes,
-      //   include:[{
-      //     model: Freelancer,
-      //     model: Specialities,
-      //     required : true,
-      //   }],
-      //   where: {
-      //     id: req.params.id
-      //   }
-      // });
       const { title, description, period, amount, city, day_of_week} = announcements;
       const freelancers = await Freelancer.findByPk(announcements.freelancer_id);
-      const { bio, name } = freelancers;
+      // const { bio, name } = freelancers;
       const specialities = await Specialities.findByPk(freelancers.speciality_id);
-      const {speciality_function} = specialities;
+      // const {speciality_function} = specialities;
 
 
       if(!announcements){
@@ -237,11 +225,7 @@ class AnnouncementsController {
         period,
         amount,
         city,
-        day_of_week,
-        speciality_id,
-        bio,
-        name,
-        speciality_function,
+        day_of_week
       });
 
 
