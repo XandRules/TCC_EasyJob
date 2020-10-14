@@ -11,6 +11,7 @@ import FileController from "./app/controllers/FileController";
 import JobController from "./app/controllers/JobController";
 import AddressController from "./app/controllers/AddressController";
 import MailController from "./app/controllers/MailController";
+import ChatController from "./app/controllers/ChatController";
 
 import authMiddleware from "./app/middlewares/auth";
 
@@ -33,7 +34,8 @@ routes.get("/address", AddressController.index);
 routes.get("/address/freelancer/:id", AddressController.freelancerAddress);
 routes.get("/address/establish/:id", AddressController.establishAddress);
 routes.put("/address/:id", AddressController.update);
-// routes.get('/chat', ChatController.index);
+routes.get('/chat', ChatController.index);
+routes.post('/chat/create', ChatController.create);
 routes.get("/establishments", EstablishmentController.index);
 routes.get("/establishments/:id", EstablishmentController.indexById);
 routes.put("/establishments/:id", EstablishmentController.update);
