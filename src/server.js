@@ -5,11 +5,17 @@ var io = require('socket.io')(http);
 
 var clients = {}; 
 
-app.get('/', function(req, res){
-  res.send('server is running');
+app.get('/newchat', function(req, res){
+
+  io.on("connection", client =>{
+      client.join(req.params);
+  })
+    
+  return res.send('server is running');
 });
 
 io.on("connection", function (client) {  
+
     client.on("join", function(name){
     	console.log("Joined: " + name);
         clients[client.id] = name;
