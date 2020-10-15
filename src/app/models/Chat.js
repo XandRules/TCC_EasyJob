@@ -8,7 +8,6 @@ class Chat extends Model {
         message: Sequelize.STRING,
         room : Sequelize.STRING,
         date: Sequelize.DATE,
-        canceled_at: Sequelize.DATE,
       },
       {
         sequelize,

@@ -16,7 +16,7 @@ class ChatController {
       const schema = Yup.object().shape({
         room: Yup.string().required(),
         freelancer_id: Yup.number().required(),
-        establish_id: Yup.number().required(),
+        establishment_id: Yup.number().required(),
         announcement_id: Yup.number().required(),
         message: Yup.string(),
       });
