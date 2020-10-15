@@ -7,6 +7,7 @@ import Speciality from '../app/models/Speciality';
 import Announcements from '../app/models/Announcements';
 import Job from '../app/models/Job';
 import Address from '../app/models/Address';
+import Chat from '../app/models/Chat';
 
 import databaseConfig from '../config/database';
 
@@ -18,6 +19,7 @@ const models = [
   Announcements,
   Job,
   Address,
+  Chat,
 ];
 
 class Database {
