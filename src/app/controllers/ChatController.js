@@ -1,4 +1,4 @@
-
+import Freelancere from '../models/freelancer'
 
 class ChatController {
 
@@ -7,7 +7,8 @@ class ChatController {
   }
 
   async create(req, res) {
-    return res.json({"connected": `server is running ${req.anuncio_id}`});
+
+    return res.json({"connected": `server is running ${req.body.room}`});
   }
 }
 

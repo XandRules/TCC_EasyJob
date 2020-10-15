@@ -5,13 +5,19 @@ var io = require('socket.io')(http);
 
 var clients = {}; 
 
-app.get('/newchat/:room', function(req, res){
+app.post('/newchat', function(req, res){
+
+    console.log(req.body)
+
+    var ret;
 
   io.on("connection", client =>{
-      client.join(req.params);
+      client.join(req.body.room);
   })
+
+  console.log(ret);
     
-  return res.json({room : `server is running ${req.params}`});
+  return res.json({room : req.body.room});
 });
 
 io.on("connection", function (client) {  
