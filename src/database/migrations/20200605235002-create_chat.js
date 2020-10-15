@@ -9,15 +9,15 @@ module.exports = {
       },
       message: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       room: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       date: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
       },
       freelancer_id: {
         type: Sequelize.INTEGER,
