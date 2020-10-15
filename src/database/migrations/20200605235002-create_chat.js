@@ -9,7 +9,7 @@ module.exports = {
       },
       message: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       room: {
         type: Sequelize.STRING,
