@@ -38,6 +38,10 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
+      id_hash: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       active: {
         type: Sequelize.BOOLEAN,
         allowNull: false,

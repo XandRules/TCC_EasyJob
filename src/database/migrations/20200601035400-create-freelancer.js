@@ -34,6 +34,10 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
+      id_hash: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       birth: {
         type: Sequelize.DATE,
         allowNull: false,

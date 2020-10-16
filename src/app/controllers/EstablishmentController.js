@@ -13,6 +13,7 @@ class EstablishmentController {
       phone: Yup.string().required(),
       active: Yup.boolean().default(false),
       terms_of_use: Yup.boolean(),
+      id_hash: Yup.string().required(),
       password: Yup.string().required().min(6),
     });
 
@@ -50,6 +51,7 @@ class EstablishmentController {
       active,
       cnpj,
       phone,
+      id_hash,
     } = newEstablishment;
 
     return res.json({
@@ -60,6 +62,7 @@ class EstablishmentController {
       active,
       cnpj,
       phone,
+      id_hash,
     });
   }
 
@@ -76,6 +79,7 @@ class EstablishmentController {
         "email",
         "phone",
         "avatar_id",
+        "id_hash",
       ],
     });
 
@@ -97,6 +101,7 @@ class EstablishmentController {
         "email",
         "phone",
         "avatar_id",
+        "id_hash",
       ],
     });
 

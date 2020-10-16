@@ -21,6 +21,7 @@ class Freelancer extends Model {
       password: Sequelize.VIRTUAL,
       speciality_id: Sequelize.NUMBER,
       avatar_id: Sequelize.NUMBER,
+      id_hash: Sequelize.STRING,
     }, {
       sequelize,
     });

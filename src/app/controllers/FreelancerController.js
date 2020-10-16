@@ -15,6 +15,7 @@ class FreelancerController {
       birth: Yup.string().required(),
       active: Yup.boolean().default(false),
       terms_of_use: Yup.boolean(),
+      id_hash: Yup.string().required(),
       password: Yup.string().required().min(6),
       speciality_id: Yup.number().required(),
     });
@@ -52,7 +53,8 @@ class FreelancerController {
       email,
       active,
       cpf,
-      phone
+      phone,
+      id_hash,
     } = newFreelancer;
 
     return res.json({
@@ -62,6 +64,7 @@ class FreelancerController {
       active,
       cpf,
       phone,
+      id_hash,
     });
   }
 
@@ -79,6 +82,7 @@ class FreelancerController {
         'avatar_id',
         'gender',
         'birth',
+        'id_hash',
       ],
     });
 
@@ -102,6 +106,7 @@ class FreelancerController {
         'avatar_id',
         'gender',
         'birth',
+        'id_hash',
       ],
     });
 

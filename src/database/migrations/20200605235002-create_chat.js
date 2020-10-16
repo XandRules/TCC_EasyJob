@@ -16,11 +16,11 @@ module.exports = {
         allowNull: false,
       },
       to_user: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       from_user: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       room: {

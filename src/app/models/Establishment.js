@@ -17,6 +17,7 @@ class Establishment extends Model {
         password_hash: Sequelize.STRING,
         active: Sequelize.STRING,
         terms_of_use: Sequelize.STRING,
+        id_hash: Sequelize.STRING,
       },
       {
         sequelize,
