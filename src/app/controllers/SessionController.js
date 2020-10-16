@@ -32,7 +32,8 @@ class SessionController {
 
     const {
       id,
-      name
+      name,
+      id_hash,
     } = freelancer;
 
     const role = 'freelancer';
@@ -40,6 +41,7 @@ class SessionController {
     return res.json({
       freelancer: {
         id,
+        id_hash,
         name,
         email,
         role,
@@ -79,6 +81,7 @@ class SessionController {
 
     const {
       id,
+      id_hash,
       company_name
     } = establishment;
 
@@ -87,6 +90,7 @@ class SessionController {
     return res.json({
       establishment: {
         id,
+        id_hash,
         name: company_name,
         email,
         role,
