@@ -81,7 +81,7 @@ class ChatController {
 
       let name = '';
 
-      const {to_user, from_user, room , message, room} = chat;
+      const {to_user, from_user, room , message} = chat;
 
       const freelancer = await Freelancer.findOne({
         where:{
