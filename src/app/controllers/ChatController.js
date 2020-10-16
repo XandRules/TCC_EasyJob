@@ -18,6 +18,8 @@ class ChatController {
         freelancer_id: Yup.number().required(),
         establishment_id: Yup.number().required(),
         announcement_id: Yup.number().required(),
+        to_user: Yup.number().required(),
+        from_user: Yup.number().required(),
         message: Yup.string(),
       });
 
@@ -34,7 +36,8 @@ class ChatController {
         });
       }
 
-      return res.json(chat);      
+      return res.json(chat);  
+
   } catch (error) {
       if (error instanceof Yup.ValidationError) {
         console.log(error);
@@ -42,6 +45,22 @@ class ChatController {
           "error": error
         });
       }
+    }
+  }
+
+  async indexFromUser(req,res){
+    try {
+      const chat = Chat.findAll({
+        where: {
+          from_user: req.body.id
+        }
+      });
+
+      if(!chat){
+        return res.json(chat);
+      }
+    } catch (error) {
+      return res.json({"error": error});
     }
   }
 }
