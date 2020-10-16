@@ -15,6 +15,18 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      to_user: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      from_user: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      room: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       date: {
         type: Sequelize.DATE,
         allowNull: true,
