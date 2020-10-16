@@ -52,7 +52,7 @@ class ChatController {
     try {
       const chat = Chat.findAll({
         where: {
-          from_user: req.body.id
+          from_user: req.params.id
         }
       });
 
