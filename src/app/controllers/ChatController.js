@@ -59,6 +59,8 @@ class ChatController {
       if(!chat){
         return res.json(chat);
       }
+
+      return res.json(chat);
     } catch (error) {
       return res.json({"error": error});
     }
