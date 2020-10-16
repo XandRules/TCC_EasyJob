@@ -8,8 +8,8 @@ class Chat extends Model {
         message: Sequelize.STRING,
         room : Sequelize.STRING,
         date: Sequelize.DATE,
-        to_user: Sequelize.INTEGER,
-        from_user: Sequelize.INTEGER,
+        to_user: Sequelize.STRING,
+        from_user: Sequelize.STRING,
       },
       {
         sequelize,

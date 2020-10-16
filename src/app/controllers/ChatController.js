@@ -18,8 +18,8 @@ class ChatController {
         freelancer_id: Yup.number().required(),
         establishment_id: Yup.number().required(),
         announcement_id: Yup.number().required(),
-        to_user: Yup.number().required(),
-        from_user: Yup.number().required(),
+        to_user: Yup.string().required(),
+        from_user: Yup.string().required(),
         message: Yup.string(),
       });
 
@@ -52,7 +52,7 @@ class ChatController {
     try {
       const chat = Chat.findAll({
         where: {
-          from_user: req.params.id
+          from_user: req.params.id_hash
         }
       });
 
