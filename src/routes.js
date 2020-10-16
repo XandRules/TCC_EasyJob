@@ -36,6 +36,7 @@ routes.get("/address/establish/:id", AddressController.establishAddress);
 routes.put("/address/:id", AddressController.update);
 routes.get('/chat', ChatController.index);
 routes.get('/chat/index/:id_hash', ChatController.indexFromUser);
+routes.get('/chat/userroom/:room', ChatController.indexChatFromUser);
 routes.post('/create/chat', ChatController.create);
 routes.get("/establishments", EstablishmentController.index);
 routes.get("/establishments/:id", EstablishmentController.indexById);

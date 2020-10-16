@@ -2,6 +2,7 @@ import Freelancer from '../models/freelancer'
 import Chat from '../models/Chat'
 
 import * as Yup from 'yup';
+import Establishment from '../models/Establishment';
 
 class ChatController {
 
@@ -61,6 +62,56 @@ class ChatController {
       }
 
       return res.json(chat);
+    } catch (error) {
+      return res.json({"error": error});
+    }
+  }
+
+  async indexChatFromUser(req,res){
+    try {
+      const chat = await Chat.findAll({
+        where: {
+          room: req.params.room
+        }
+      });
+
+      if(!chat){
+        return res.json(chat);
+      }
+
+      let name = '';
+
+      const {to_user, from_user, room , message, room} = chat;
+
+      const freelancer = await Freelancer.findOne({
+        where:{
+          id_hash : to_user
+        }
+      })
+
+      if(!freelancer){
+        console.log('freelancer não encontrado');
+
+        const establishment = await Establishment.findOne({
+          where:{
+            id_hash : to_user
+          }
+        });
+
+       name = establishment.company_name;
+
+      }else{
+        name = freelancer.name
+      }
+
+      return res.json({
+        message,
+        to_user,
+        from_user,
+        date,
+        name,
+        room,
+      });
     } catch (error) {
       return res.json({"error": error});
     }
