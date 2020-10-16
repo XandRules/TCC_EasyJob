@@ -198,7 +198,7 @@ class AnnouncementsController {
      
       const { title, description, period, amount, city, day_of_week} = announcements;
       const freelancers = await Freelancer.findByPk(announcements.freelancer_id);
-      const { id, bio, name } = freelancers;
+      const { id, bio, name, id_hash } = freelancers;
       const specialities = await Specialities.findByPk(announcements.speciality_id);
        const {speciality_function} = specialities;
 
@@ -219,6 +219,7 @@ class AnnouncementsController {
       }
 
       const freelancer_id = id;
+      const freelancer_id_hash = id_hash;
 
 
       return res.json({
@@ -231,6 +232,7 @@ class AnnouncementsController {
         bio,
         name,
         freelancer_id,
+        freelancer_id_hash,
         speciality_function
       });
 
