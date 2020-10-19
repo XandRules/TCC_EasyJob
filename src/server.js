@@ -44,7 +44,7 @@ app.post('/newchat', function(req, res){
 
 io.on("connection", function (client) {  
 
-    client.on(room, function(name){
+    client.on("join", function(name){
     	console.log("Joined: " + name);
         clients[client.id] = name;
         client.emit("update", "You have connected to the server.");
