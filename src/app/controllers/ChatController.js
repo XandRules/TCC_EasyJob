@@ -53,7 +53,7 @@ class ChatController {
     try {
       const chat = await Chat.findAll({
         where: {
-          from_user: req.params.id_hash
+          to_user: req.params.id_hash
         }
       });
 
