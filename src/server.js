@@ -5,8 +5,11 @@ var io = require('socket.io')(http);
 
 var clients = {}; 
 
-io.on("connection", function (client) {  
+app.get('/', function(req, res){
+  res.send('server is running');
+});
 
+io.on("connection", function (client) {  
     client.on("join", function(name){
     	console.log("Joined: " + name);
         clients[client.id] = name;
@@ -16,7 +19,7 @@ io.on("connection", function (client) {
 
     client.on("send", function(msg){
     	console.log("Message: " + msg);
-        client.emit(room, clients[client.id], msg);
+        client.broadcast.emit("chat", clients[client.id], msg);
     });
 
     client.on("disconnect", function(){
@@ -29,3 +32,4 @@ io.on("connection", function (client) {
 var server  = app.listen(process.env.PORT || 3333);
 
 io.listen(server);
+
