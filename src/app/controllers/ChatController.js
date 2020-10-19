@@ -76,7 +76,7 @@ class ChatController {
       });
 
       if(!chat){
-        return res.json(chat);
+        return res.json('chat não encontrado!');
       }
 
       let name = '';
