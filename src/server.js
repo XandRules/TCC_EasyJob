@@ -3,6 +3,8 @@ import app from './app';
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+import ChatController from './app/controllers/ChatController';
+
 var clients = {}; 
 
 app.get('/', function(req, res){
@@ -18,7 +20,7 @@ io.on("connection", function (client) {
     });
 
     client.on("send", function(msg){
-    	console.log("Message: " + msg);
+        console.log("Message: " + msg);
         client.broadcast.emit("chat", clients[client.id], msg);
     });
 
