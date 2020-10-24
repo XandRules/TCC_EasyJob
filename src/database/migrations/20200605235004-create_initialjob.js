@@ -1,25 +1,29 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
-    queryInterface.createTable('jobs', {
+    queryInterface.createTable('initialjobs', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      freelancer_evaluation: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
+      to_user: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
-      freelancer_comment: {
+      from_user: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      comment: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      establishment_evaluation: {
-        type: Sequelize.INTEGER,
+      begin_time: {
+        type: Sequelize.STRING,
         allowNull: true,
       },
-      establishment_comment: {
+      end_time: {
         type: Sequelize.STRING,
         allowNull: true,
       },
@@ -27,38 +31,22 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      freelancer_id: {
+      amount: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      job_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'freelancers',
+          model: 'jobs',
           key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
       },
-      establishment_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'establishments',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: true,
-      },
-      announcement_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'announcements',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: true,
-      },
-      canceled_at: {
-        type: Sequelize.DATE,
+      accepted: {
+        type: Sequelize.BOOLEAN,
         allowNull: true,
       },
       created_at: {
@@ -72,7 +60,6 @@ module.exports = {
     }),
 
   down: (queryInterface) => {
-    return queryInterface.dropTable('jobs');
+    return queryInterface.dropTable('initialjobs');
   },
 };
-

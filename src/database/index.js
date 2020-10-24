@@ -10,6 +10,7 @@ import Address from '../app/models/Address';
 import Chat from '../app/models/Chat';
 
 import databaseConfig from '../config/database';
+import InitialJob from '../app/models/InitialJob';
 
 const models = [
   Freelancer,
@@ -20,6 +21,7 @@ const models = [
   Job,
   Address,
   Chat,
+  InitialJob,
 ];
 
 class Database {
