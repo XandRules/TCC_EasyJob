@@ -14,6 +14,7 @@ import MailController from "./app/controllers/MailController";
 import ChatController from "./app/controllers/ChatController";
 
 import authMiddleware from "./app/middlewares/auth";
+import InitialJobController from "./app/controllers/InitialJobController";
 
 const routes = new Router();
 
@@ -53,6 +54,8 @@ routes.get("/announcements/search/:id", AnnouncementController.findAnnouncemetFr
 routes.delete("/announcements/:id", AnnouncementController.delete);
 routes.post("/jobs", JobController.store);
 routes.get("/jobs", JobController.index);
+routes.post("/initialjob", InitialJobController.store);
+routes.get("/initialjob", InitialJobController.index);
 
 routes.post("/files", upload.single("file"), FileController.store);
 
