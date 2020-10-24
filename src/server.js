@@ -7,7 +7,15 @@ import ChatController from './app/controllers/ChatController';
 
 var clients = {}; 
 
-app.get('/', function(req, res){
+app.post('/newchat', function(req, res){
+
+    io.on("connection", client =>{
+        const name = req.body.room;
+
+        client.join(name, function(error){
+            return res.json({error});
+        })
+    })
   res.send('server is running');
 });
 
