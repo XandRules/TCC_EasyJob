@@ -15,8 +15,9 @@ app.post('/newchat', function(req, res){
         client.join(name, function(error){
             return res.json({error});
         })
+
+        res.send({room : req.body.room});
     })
-  res.send('server is running');
 });
 
 io.on("connection", function (client) {  
