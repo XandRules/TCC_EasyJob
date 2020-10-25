@@ -21,7 +21,7 @@ class InitialJobController {
           date: Yup.date().required(),
           begin_time: Yup.string().required(),
           end_time: Yup.string().required(),
-          accepted : Yup.boolean(),
+          accepted : Yup.boolean().default(false),
         });
     
         await schema.validate(req.body, {
