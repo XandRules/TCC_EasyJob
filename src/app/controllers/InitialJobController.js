@@ -21,13 +21,14 @@ class InitialJobController {
           date: Yup.date().required(),
           begin_time: Yup.string().required(),
           end_time: Yup.string().required(),
+          accepted : Yup.boolean(),
         });
     
         await schema.validate(req.body, {
           abortEarly: false,
         });
     
-        const { date, freelancer_id, establishment_id, announcement_id } = req.body;
+        const { date } = req.body;
     
         const hourStart = startOfHour(parseISO(date));
     
