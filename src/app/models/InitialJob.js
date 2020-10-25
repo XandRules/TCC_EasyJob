@@ -12,6 +12,7 @@ class InitialJob extends Model {
         end_time : Sequelize.STRING,        
         date: Sequelize.DATE,
         amount : Sequelize.INTEGER,
+        accepted : Sequelize.STRING,
       },
       {
         sequelize,
