@@ -10,6 +10,16 @@ class InitialJobController {
     return res.json(jobs);
   } 
 
+  async indexById(req, res) {
+    const initialJobs = await InitialJob.findAll({
+      where:{
+        to_user: req.params.id_hash,
+      }
+    });
+
+    return res.json(jobs);
+  } 
+
   async store(req, res) {
 
     try {
