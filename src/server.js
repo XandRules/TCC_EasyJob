@@ -16,8 +16,8 @@ app.post('/newchat', function(req, res){
             return res.json({error});
         })
 
-        res.send({room : req.body.room});
     })
+    res.send({room : req.body.room});
 });
 
 io.on("connection", function (client) {  
