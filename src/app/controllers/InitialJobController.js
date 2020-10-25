@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { startOfHour, parseISO, isBefore } from 'date-fns';
 import Job from '../models/Job';
-import InitialJob from '../models/InitialJob';
+import InitialJob from '../models/Initialjob';
 
 class InitialJobController {
   async index(req, res) {

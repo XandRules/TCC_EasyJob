@@ -2,7 +2,7 @@ import Sequelize, { Model } from 'sequelize';
 
 class InitialJob extends Model {
   static init(sequelize) {
-    // migration de freelancer
+    // migration de initial job
     super.init(
       {
         to_user : Sequelize.STRING,
