@@ -143,9 +143,9 @@ class EstablishmentController {
           },
         });
 
-        if (establishmentExists) {
-          return res.status(400).json({
-            error: "Establishment already exists.",
+        if (!establishmentExists) {
+          return res.json({
+            error: "Establishment Not found.",
           });
         }
       }
