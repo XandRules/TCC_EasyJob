@@ -53,7 +53,7 @@ routes.get("/freelancers/:id", FreelancerController.indexById);
 routes.post("/announcement", AnnouncementController.store);
 routes.get("/announcements", AnnouncementController.index);
 routes.get("/announcements/:id", AnnouncementController.indexById);
-routes.put("/announcements/:id", AnnouncementController.update);
+routes.put("/easyjob/:id", AnnouncementController.update);
 routes.get("/announcements/search/:id", AnnouncementController.findAnnouncemetFromFreelancer);
 routes.delete("/announcements/:id", AnnouncementController.delete);
 
