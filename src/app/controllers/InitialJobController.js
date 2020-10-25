@@ -11,32 +11,43 @@ class InitialJobController {
   } 
 
   async store(req, res) {
-    const schema = Yup.object().shape({
-      to_user: Yup.string().required(),
-      from_user: Yup.string().required(),
-      amount: Yup.number().required(),
-      comment: Yup.string(),
-      date: Yup.date().required(),
-      job_id: Yup.number().required(),
-      begin_time: Yup.string().required(),
-      end_time: Yup.string().required(),
-    });
 
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json('Validation fail');
-    }
+    try {
+        const schema = Yup.object().shape({
+          to_user: Yup.string().required(),
+          from_user: Yup.string().required(),
+          amount: Yup.number().required(),
+          comment: Yup.string(),
+          date: Yup.date().required(),
+          begin_time: Yup.string().required(),
+          end_time: Yup.string().required(),
+        });
+    
+        await schema.validate(req.body, {
+          abortEarly: false,
+        });
+    
+        const { date, freelancer_id, establishment_id, announcement_id } = req.body;
+    
+        const hourStart = startOfHour(parseISO(date));
+    
+        if (isBefore(hourStart, new Date())) {
+          return res.status(400).json({ error: 'Past dates are not permitted' });
+        }
+    
+        const initialJob = await InitialJob.create(req.body);    
+    
+        return res.json({ initialJob });
+      
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          console.log(error);
+          return res.json({
+            "error": error
+          });
+        }
+      }
 
-    const { date, freelancer_id, establishment_id, announcement_id } = req.body;
-
-    const hourStart = startOfHour(parseISO(date));
-
-    if (isBefore(hourStart, new Date())) {
-      return res.status(400).json({ error: 'Past dates are not permitted' });
-    }
-
-    const initialJob = await InitialJob.create(req.body);
-
-    return res.json({ initialJob });
   }
 }
 
