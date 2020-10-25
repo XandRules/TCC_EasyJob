@@ -132,23 +132,14 @@ class EstablishmentController {
         abortEarly: false,
       });
 
-      const { email, oldPassword } = req.body;
-
       const establishment = await Establishment.findByPk(req.userId);
 
-      if (email !== establishment.email) {
-        const establishmentExists = await Establishment.findOne({
-          where: {
-            email,
-          },
+      if (!establishmentExists) {
+        return res.json({
+          error: "Establishment Not found.",
         });
-
-        if (!establishmentExists) {
-          return res.json({
-            error: "Establishment Not found.",
-          });
-        }
       }
+      
 
       if (oldPassword && !(await establishment.checkPassword(oldPassword))) {
         return res.status(401).json({
