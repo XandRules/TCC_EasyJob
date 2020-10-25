@@ -33,7 +33,7 @@ class InitialJobController {
         const hourStart = startOfHour(parseISO(date));
     
         if (isBefore(hourStart, new Date())) {
-          return res.status(400).json({ error: 'Past dates are not permitted' });
+          return res.json({ error: 'Past dates are not permitted' });
         }
     
         const initialJob = await InitialJob.create(req.body);    
