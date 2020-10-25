@@ -134,7 +134,7 @@ class EstablishmentController {
 
       const establishment = await Establishment.findByPk(req.userId);
 
-      if (!establishmentExists) {
+      if (!establishment) {
         return res.json({
           error: "Establishment Not found.",
         });
