@@ -27,6 +27,11 @@ class Job extends Model {
       as: 'establishment',
     });
 
+    this.belongsTo(models.InitialJob, {
+      foreignKey: 'initial_job_id',
+      as: 'initial_job',
+    });
+
     this.belongsTo(models.Announcement, {
       foreignKey: 'announcement_id',
       as: 'announcement',

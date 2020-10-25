@@ -35,16 +35,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      job_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'jobs',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: true,
-      },
       accepted: {
         type: Sequelize.BOOLEAN,
         allowNull: true,
