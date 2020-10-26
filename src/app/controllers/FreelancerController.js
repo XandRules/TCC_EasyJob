@@ -18,6 +18,7 @@ class FreelancerController {
       id_hash: Yup.string().required(),
       password: Yup.string().required().min(6),
       speciality_id: Yup.number().required(),
+      address_id : Yup.number().required(),
     });
 
     if (!(await schema.isValid(req.body))) {

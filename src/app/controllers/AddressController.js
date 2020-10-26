@@ -12,8 +12,6 @@ class AddressController {
         number: Yup.string().required(),
         cep: Yup.string().required(),
         city: Yup.string().required(),
-        freelancer_id: Yup.number(),
-        establish_id: Yup.number(),
       });
 
       await schema.validate(req.body, {
@@ -35,8 +33,6 @@ class AddressController {
         number,
         public_place,
         neighborhood,
-        freelancer_id,
-        establish_id,
         uf,
         cep,
       } = newAddress;
@@ -47,8 +43,6 @@ class AddressController {
         number,
         public_place,
         neighborhood,
-        freelancer_id,
-        establish_id,
         uf,
         cep,
       });
@@ -116,8 +110,6 @@ class AddressController {
         'number',
         'public_place',
         'neighborhood',
-        'freelancer_id',
-        'establish_id',
         'uf',
         'cep',
       ],
@@ -132,8 +124,6 @@ class AddressController {
       number: Yup.number(),
       public_place: Yup.string(),
       neighborhood: Yup.string(),
-      freelancer_id: Yup.number(),
-      establish_id:Yup.number(),
       cep: Yup.string(),
       uf: Yup.string(),
     });
@@ -160,8 +150,6 @@ class AddressController {
       number,
       public_place,
       neighborhood,
-      freelancer_id,
-      establish_id,
       uf,
       cep,
     } = await address.update(req.body);
@@ -172,8 +160,6 @@ class AddressController {
       number,
       public_place,
       neighborhood,
-      freelancer_id,
-      establish_id,
       uf,
       cep,
     });
