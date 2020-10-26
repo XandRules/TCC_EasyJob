@@ -18,7 +18,7 @@ class InitialJobController {
 
       const Op = Sequelize.Op;
 
-      const {id , to_user, from_user, comment, begin_time, end_time, date, amount, accepted, announcement_id} = await InitialJob.findAll({
+      const initialJobs = await InitialJob.findAll({
         where:{
           [Op.or]: [
             { to_user: req.params.id_hash },
@@ -27,7 +27,7 @@ class InitialJobController {
         }
       });
 
-      console.log("initialJobs", id , to_user, from_user, comment, begin_time, end_time, date, amount, accepted, announcement_id)
+      console.log("initialJobs", initialJobs)
 
       const announcements = await Announcement.findByPk({
         where :{
