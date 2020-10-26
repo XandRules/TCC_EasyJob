@@ -40,6 +40,13 @@ class Freelancer extends Model {
       foreignKey: 'avatar_id',
       as: 'avatar'
     });
+
+    this.belongsTo(models.Address, {
+      foreignKey: 'address_id',
+      as: 'address'
+    });
+
+
   }
 
   checkPassword(password) {
