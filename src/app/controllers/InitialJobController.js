@@ -31,8 +31,6 @@ class InitialJobController {
     } catch (error) {
       return res.json({error: error});
     }
-
-
   } 
 
   async indexByIdCount(req, res) {
@@ -71,6 +69,7 @@ class InitialJobController {
           begin_time: Yup.string().required(),
           end_time: Yup.string().required(),
           accepted : Yup.boolean().default(false),
+          announcement_id: Yup.number().required(),
         });
     
         await schema.validate(req.body, {

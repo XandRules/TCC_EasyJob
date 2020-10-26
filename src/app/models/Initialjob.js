@@ -22,11 +22,11 @@ class InitialJob extends Model {
     return this;
   }
 
-  // static associate(models) {
-  //   this.belongsTo(models.Job, {
-  //     foreignKey: 'job_id',
-  //     as: 'job',
-  //   });
-  // }
+  static associate(models) {
+    this.belongsTo(models.Announcement, {
+      foreignKey: 'announcement_id',
+      as: 'announcement',
+    });
+  }
 }
 export default InitialJob;
