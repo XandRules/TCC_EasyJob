@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import { startOfHour, parseISO, isBefore } from 'date-fns';
 import Job from '../models/Job';
 import InitialJob from '../models/Initialjob';
-import { Sequelize } from 'sequelize/types';
+import Sequelize from 'sequelize';
 
 class InitialJobController {
   async index(req, res) {
