@@ -23,6 +23,10 @@ class InitialJobController {
           association: 'announcement',
           required: true,
         }],
+        include:[{
+          association: 'establishment',
+          required : true ,
+        }],
         where:{
           [Op.or]: [
             { to_user: req.params.id_hash },
