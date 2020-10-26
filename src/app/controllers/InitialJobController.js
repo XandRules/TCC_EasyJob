@@ -35,6 +35,30 @@ class InitialJobController {
 
   } 
 
+  async indexByIdCount(req, res) {
+
+    try {
+
+      const Op = Sequelize.Op;
+
+      const initialJobs = await InitialJob.count({
+        where:{
+          [Op.or]: [
+            { to_user: req.params.id_hash },
+            { from_user: req.params.id_hash}
+          ]
+        }
+      });
+  
+      return res.json(initialJobs);
+      
+    } catch (error) {
+      return res.json({error: error});
+    }
+
+
+  } 
+
   async store(req, res) {
 
     try {
