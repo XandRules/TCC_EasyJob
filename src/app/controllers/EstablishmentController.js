@@ -162,19 +162,15 @@ class EstablishmentController {
 
       console.log("Vai atualizar")
 
-      const { id, name, active, cpf, phone } = await Establishment.update(
+      const { id, company_name, social_reason, bio, phone } = await Establishment.update(
         req.body
       );
 
-      
-      console.log("retorno da função", id, name, email, active, cpf, phone);
-
       return res.json({
         id,
-        name,
-        email,
-        active,
-        cpf,
+        company_name,
+        social_reason,
+        bio,
         phone,
       });
     } catch (error) {
