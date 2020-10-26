@@ -22,10 +22,6 @@ class InitialJobController {
         include:[{
           association: 'announcement',
           required: true,
-          include :[{
-            association : 'establishment',
-            required : true,
-          }]
         }],
         where:{
           [Op.or]: [
@@ -35,19 +31,9 @@ class InitialJobController {
         }
       });
 
-      console.log("initialJobs", initialJobs)
-
-      return res.json(initialJobs)
-
-      const announcements = await Announcement.findByPk({
-        where :{
-          id: initialJobs.announcement_id,
-        }
-      })
-
-      console.log(announcements)
+      console.log("initialJobs", initialJobs[0])
   
-      return res.json({job : {
+      return res.json({job :
          id ,
          to_user,
          from_user,
@@ -57,8 +43,7 @@ class InitialJobController {
          date,
          amount,
          accepted,
-         announcement_id},
-       announcement : announcements});
+         announcement_id});
       
     } catch (error) {
       return res.json({error: error});
