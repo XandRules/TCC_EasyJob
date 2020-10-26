@@ -127,18 +127,26 @@ class EstablishmentController {
           password ? field.required().oneOf([Yup.ref("password")]) : field
         ),
       });
-
+      
       await schema.validate(req.body, {
         abortEarly: false,
       });
 
+      console.log("Validação");
+
       const establishment = await Establishment.findByPk(req.params.id);
+
+
+      console.log("consulta por id", establishment);
 
       if (!establishment) {
         return res.json({
           error: "Establishment Not found.",
         });
       }
+
+
+      console.log("achou estabelecimento");
       
 
       if (oldPassword && !(await establishment.checkPassword(oldPassword))) {
@@ -150,6 +158,9 @@ class EstablishmentController {
       const { id, name, active, cpf, phone } = await establishment.update(
         req.body
       );
+
+      
+      console.log("retorno da função", id, name, email, active, cpf, phone);
 
       return res.json({
         id,
