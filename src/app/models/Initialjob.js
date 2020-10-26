@@ -27,6 +27,11 @@ class InitialJob extends Model {
       foreignKey: 'announcement_id',
       as: 'announcement',
     });
+
+    this.belongsTo(models.Establishment, {
+      foreignKey: 'establishment_id',
+      as: 'establishment',
+    });
   }
 }
 export default InitialJob;
