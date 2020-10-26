@@ -137,7 +137,7 @@ class FreelancerController {
       await schema.validate(req.body, {
         abortEarly: false,
       });
-
+      
       const {
         oldPassword
       } = req.body;

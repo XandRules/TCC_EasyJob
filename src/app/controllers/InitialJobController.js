@@ -11,13 +11,21 @@ class InitialJobController {
   } 
 
   async indexById(req, res) {
-    const initialJobs = await InitialJob.findAll({
-      where:{
-        to_user: req.params.id_hash,
-      }
-    });
 
-    return res.json(jobs);
+    try {
+      const initialJobs = await InitialJob.findAll({
+        where:{
+          to_user: req.params.id_hash,
+        }
+      });
+  
+      return res.json(initialJobs);
+      
+    } catch (error) {
+      return res.json({error: error});
+    }
+
+
   } 
 
   async store(req, res) {

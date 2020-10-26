@@ -132,7 +132,7 @@ class EstablishmentController {
         abortEarly: false,
       });
 
-      const establishment = await Establishment.findByPk(req.userId);
+      const establishment = await Establishment.findByPk(req.params.id);
 
       if (!establishment) {
         return res.json({
