@@ -162,7 +162,7 @@ class EstablishmentController {
 
       console.log("Vai atualizar")
 
-      const { id, name, active, cpf, phone } = await establishment.update(
+      const { id, name, active, cpf, phone } = await Establishment.update(
         req.body
       );
 
