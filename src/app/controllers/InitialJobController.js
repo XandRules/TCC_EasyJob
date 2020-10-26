@@ -3,6 +3,7 @@ import { startOfHour, parseISO, isBefore } from 'date-fns';
 import Job from '../models/Job';
 import InitialJob from '../models/Initialjob';
 import Sequelize from 'sequelize';
+import Announcement from '../models/Announcements';
 
 class InitialJobController {
   async index(req, res) {
@@ -18,10 +19,10 @@ class InitialJobController {
       const Op = Sequelize.Op;
 
       const initialJobs = await InitialJob.findAll({
-        include:{
-          association: 'announcements', required : true,
-          attributes: ['id' , 'title'],
-        },
+        include:[{
+          model : Announcement,
+          required : true,
+        }],
         where:{
           [Op.or]: [
             { to_user: req.params.id_hash },
