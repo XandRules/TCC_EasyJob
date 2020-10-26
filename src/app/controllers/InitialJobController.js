@@ -19,6 +19,10 @@ class InitialJobController {
       const Op = Sequelize.Op;
 
       const initialJobs = await InitialJob.findAll({
+        include:[{
+          association: 'Announcement',
+          required: true,
+        }],
         where:{
           [Op.or]: [
             { to_user: req.params.id_hash },
