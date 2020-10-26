@@ -29,9 +29,11 @@ class InitialJobController {
 
       console.log("initialJobs", initialJobs)
 
+      return res.json(initialJobs)
+
       const announcements = await Announcement.findByPk({
         where :{
-          id: announcement_id,
+          id: initialJobs.announcement_id,
         }
       })
 
