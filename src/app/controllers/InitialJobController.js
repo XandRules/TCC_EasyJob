@@ -40,6 +40,10 @@ class InitialJobController {
       const Op = Sequelize.Op;
 
       const initialJobs = await InitialJob.count({
+        include:[{
+          association: 'announcements', required : true,
+          attributes: ['id' , 'title'],
+        }],
         where:{
           [Op.or]: [
             { to_user: req.params.id_hash },
