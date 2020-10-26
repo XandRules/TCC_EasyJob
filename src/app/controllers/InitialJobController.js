@@ -13,9 +13,11 @@ class InitialJobController {
   async indexById(req, res) {
 
     try {
+
+      console.log("try");
       const initialJobs = await InitialJob.findAll({
         where:{
-          $or: [
+          [Op.or]: [
             { to_user: req.params.id_hash },
             { from_user: req.params.id_hash}
           ]
@@ -25,6 +27,7 @@ class InitialJobController {
       return res.json(initialJobs);
       
     } catch (error) {
+      console.log("catch");
       return res.json({error: error});
     }
 
