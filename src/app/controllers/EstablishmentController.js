@@ -149,7 +149,7 @@ class EstablishmentController {
       }
 
 
-      console.log("achou estabelecimento");
+      console.log("achou estabelecimento", req.body);
       
 
       // if (oldPassword && !(await establishment.checkPassword(oldPassword))) {
@@ -157,6 +157,8 @@ class EstablishmentController {
       //     error: "Password does not match",
       //   });
       // }
+
+
 
       console.log("Vai atualizar")
 
