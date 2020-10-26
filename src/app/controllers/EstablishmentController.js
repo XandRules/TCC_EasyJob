@@ -149,16 +149,13 @@ class EstablishmentController {
       }
 
 
-      console.log("achou estabelecimento", req.body);
-      
+      console.log("achou estabelecimento", req.body);      
 
-      // if (oldPassword && !(await establishment.checkPassword(oldPassword))) {
-      //   return res.status(401).json({
-      //     error: "Password does not match",
-      //   });
-      // }
-
-
+      if (oldPassword && !(await establishment.checkPassword(oldPassword))) {
+        return res.status(401).json({
+          error: "Password does not match",
+        });
+      }
 
       console.log("Vai atualizar")
 

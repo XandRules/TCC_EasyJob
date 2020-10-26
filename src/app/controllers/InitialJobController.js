@@ -15,7 +15,10 @@ class InitialJobController {
     try {
       const initialJobs = await InitialJob.findAll({
         where:{
-          to_user: req.params.id_hash,
+          $or: [
+            { to_user: req.params.id_hash },
+            { from_user: req.params.id_hash}
+          ]
         }
       });
   
@@ -57,6 +60,48 @@ class InitialJobController {
         const initialJob = await InitialJob.create(req.body);    
     
         return res.json({ initialJob });
+      
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          console.log(error);
+          return res.json({
+            "error": error
+          });
+        }
+      }
+
+  }
+
+  async update(req, res) {
+
+    try {
+        const schema = Yup.object().shape({
+          accepted : Yup.boolean().required(),
+        });
+    
+        await schema.validate(req.body, {
+          abortEarly: false,
+        });    
+
+        const initialJob = await InitialJob.findByPk(req.params.id);
+
+        if(!initialJob){
+          return res.json({error: 'Solicitação não encontrada!'})
+        }
+
+        const {id , to_user, from_user, comment, begin_time, end_time, date, amount, accepted} = await initialJob.update(req.body);    
+    
+        return res.json({ 
+          id ,
+          to_user,
+          from_user,
+          comment,
+          begin_time,
+          end_time,
+          date,
+          amount,
+          accepted,
+         });
       
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
