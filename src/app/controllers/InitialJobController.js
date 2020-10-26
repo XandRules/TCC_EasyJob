@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import { startOfHour, parseISO, isBefore } from 'date-fns';
 import Job from '../models/Job';
 import InitialJob from '../models/Initialjob';
+import { Sequelize } from 'sequelize/types';
 
 class InitialJobController {
   async index(req, res) {
@@ -15,6 +16,9 @@ class InitialJobController {
     try {
 
       console.log("try");
+
+      const Op = Sequelize.Op;
+
       const initialJobs = await InitialJob.findAll({
         where:{
           [Op.or]: [
@@ -23,6 +27,8 @@ class InitialJobController {
           ]
         }
       });
+
+      console.log("Buscou os dados", initialJobs);
   
       return res.json(initialJobs);
       
