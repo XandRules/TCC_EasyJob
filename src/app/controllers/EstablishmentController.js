@@ -158,6 +158,8 @@ class EstablishmentController {
         });
       }
 
+      console.log("Vai atualizar")
+
       const { id, name, active, cpf, phone } = await establishment.update(
         req.body
       );
