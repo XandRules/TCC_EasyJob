@@ -22,10 +22,6 @@ class InitialJobController {
         include:[{
           association: 'announcement',
           required: true,
-          include : [{
-            association : 'establishment',
-            required : true,
-          }],
         }],
         where:{
           [Op.or]: [
