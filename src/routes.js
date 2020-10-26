@@ -38,6 +38,7 @@ routes.put("/address/:id", AddressController.update);
 
 routes.get('/chat', ChatController.index);
 routes.get('/chat/index/:id_hash', ChatController.indexFromUser);
+routes.get('/chat/index/count/:id_hash', ChatController.indexFromUserCount);
 routes.get('/chat/userroom/:room', ChatController.indexChatFromUser);
 routes.post('/create/chat', ChatController.create);
 
@@ -63,7 +64,7 @@ routes.get("/jobs", JobController.index);
 routes.post("/initialjob", InitialJobController.store);
 routes.get("/initialjob", InitialJobController.index);
 routes.get("/initialjob/:id_hash", InitialJobController.indexById);
-routes.get("/initialjobcount/:id_hash", InitialJobController.indexByIdCount);
+routes.get("/initialjob/count/:id_hash", InitialJobController.indexByIdCount);
 routes.put("/initialjob/:id", InitialJobController.update);
 
 routes.post("/files", upload.single("file"), FileController.store);

@@ -67,6 +67,25 @@ class ChatController {
     }
   }
 
+  async indexFromUserCount(req,res){
+    try {
+      const chat = await Chat.count({
+        where: {
+          to_user: req.params.id_hash
+        }
+      });
+
+      if(!chat){
+        return res.json(chat);
+      }
+
+      return res.json(chat);
+    } catch (error) {
+      return res.json({"error": error});
+    }
+  }
+
+
   async indexChatFromUser(req,res){
     try {
       const chat = await Chat.findAll({
