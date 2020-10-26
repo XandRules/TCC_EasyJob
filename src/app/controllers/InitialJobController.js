@@ -27,7 +27,7 @@ class InitialJobController {
         }
       });
 
-      const announcements = Announcement.findAll({
+      const announcements = await Announcement.findAll({
         where :{
           id: initialJobs.announcement_id,
         }
