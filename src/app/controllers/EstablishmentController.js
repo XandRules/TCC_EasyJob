@@ -162,7 +162,7 @@ class EstablishmentController {
 
       console.log("Vai atualizar")
 
-      const { id, company_name, social_reason, bio, phone } = await Establishment.update(
+      const { id, company_name, social_reason, bio, phone } = await establishment.update(
         req.body
       );
 
@@ -181,6 +181,10 @@ class EstablishmentController {
           error: error,
         });
       }
+
+      return res.json({
+        error: error,
+      });
     }
   }
 }
