@@ -111,7 +111,7 @@ class EstablishmentController {
   async update(req, res) {
 
     console.log('iniciou-se')
-    
+    try {
       console.log('try')
       const schema = Yup.object().shape({
         company_name: Yup.string(),
@@ -120,7 +120,7 @@ class EstablishmentController {
         bio: Yup.string(),
         active: Yup.boolean(),
         oldPassword: Yup.string().min(6),
-        avatar_id: Yup.integer(),
+        avatar_id: Yup.number(),
         password: Yup.string()
           .min(6)
           .when("oldPassword", (oldPassword, field) =>
@@ -131,9 +131,9 @@ class EstablishmentController {
         ),
       });
       
-      if (!(await schema.isValid(req.body))) {
-        return res.json('Validation fail');
-      }
+      await schema.validate(req.body, {
+        abortEarly: false,
+      });
 
       console.log("Validação");
 
@@ -173,6 +173,15 @@ class EstablishmentController {
         cpf,
         phone,
       });
+    } catch (error) {
+      console.log('entrou no catch')
+      if (error instanceof Yup.ValidationError) {
+        console.log(error);
+        return res.json({
+          error: error,
+        });
+      }
+    }
   }
 }
 
