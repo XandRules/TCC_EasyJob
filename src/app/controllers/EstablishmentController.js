@@ -109,7 +109,10 @@ class EstablishmentController {
   }
 
   async update(req, res) {
+
+    console.log('iniciou-se')
     try {
+      console.log('try')
       const schema = Yup.object().shape({
         company_name: Yup.string(),
         social_reason: Yup.string(),
@@ -134,7 +137,7 @@ class EstablishmentController {
 
       console.log("Validação");
 
-      const establishment = await Establishment.findByPk(req.params.id);
+      const establishment = await Establishment.findByPk(1);
 
 
       console.log("consulta por id", establishment);
@@ -171,6 +174,7 @@ class EstablishmentController {
         phone,
       });
     } catch (error) {
+      console.log('entrou no catch')
       if (error instanceof Yup.ValidationError) {
         console.log(error);
         return res.json({
