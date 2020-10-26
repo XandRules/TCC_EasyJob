@@ -22,6 +22,10 @@ class InitialJobController {
         include:[{
           association: 'announcement',
           required: true,
+          include : [{
+            association : 'establishment',
+            required : true,
+          }]
         }],
         where:{
           [Op.or]: [
@@ -77,6 +81,7 @@ class InitialJobController {
           end_time: Yup.string().required(),
           accepted : Yup.boolean().default(false),
           announcement_id: Yup.number().required(),
+          establishment_id: Yup.number().required(),
         });
     
         await schema.validate(req.body, {
