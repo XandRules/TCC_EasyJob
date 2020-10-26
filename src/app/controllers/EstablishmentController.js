@@ -111,7 +111,7 @@ class EstablishmentController {
   async update(req, res) {
 
     console.log('iniciou-se')
-    try {
+    
       console.log('try')
       const schema = Yup.object().shape({
         company_name: Yup.string(),
@@ -131,13 +131,13 @@ class EstablishmentController {
         ),
       });
       
-      await schema.validate(req.body, {
-        abortEarly: false,
-      });
+      if (!(await schema.isValid(req.body))) {
+        return res.json('Validation fail');
+      }
 
       console.log("Validação");
 
-      const establishment = await Establishment.findByPk(1);
+      const establishment = await Establishment.findByPk(req.params.id);
 
 
       console.log("consulta por id", establishment);
@@ -173,15 +173,6 @@ class EstablishmentController {
         cpf,
         phone,
       });
-    } catch (error) {
-      console.log('entrou no catch')
-      if (error instanceof Yup.ValidationError) {
-        console.log(error);
-        return res.json({
-          error: error,
-        });
-      }
-    }
   }
 }
 

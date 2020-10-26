@@ -43,7 +43,7 @@ routes.post('/create/chat', ChatController.create);
 
 routes.get("/establishments", EstablishmentController.index);
 routes.get("/establishments/:id", EstablishmentController.indexById);
-routes.get("/tafarel", EstablishmentController.update);
+routes.put("/establishments/:id", EstablishmentController.update);
 
 routes.get("/freelancers", FreelancerController.index);
 routes.put("/freelancers/:id", FreelancerController.update);
