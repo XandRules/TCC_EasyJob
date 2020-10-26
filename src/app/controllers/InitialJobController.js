@@ -15,8 +15,6 @@ class InitialJobController {
 
     try {
 
-      console.log("try");
-
       const Op = Sequelize.Op;
 
       const initialJobs = await InitialJob.findAll({
@@ -27,13 +25,10 @@ class InitialJobController {
           ]
         }
       });
-
-      console.log("Buscou os dados", initialJobs);
   
       return res.json(initialJobs);
       
     } catch (error) {
-      console.log("catch");
       return res.json({error: error});
     }
 
