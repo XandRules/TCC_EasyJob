@@ -31,19 +31,9 @@ class InitialJobController {
         }
       });
 
-      console.log("initialJobs", initialJobs[0])
+      console.log("initialJobs", initialJobs)
   
-      return res.json({job :
-         id ,
-         to_user,
-         from_user,
-         comment,
-         begin_time,
-         end_time,
-         date,
-         amount,
-         accepted,
-         announcement_id});
+      return res.json(initialJobs);
       
     } catch (error) {
       return res.json({error: error});
