@@ -18,10 +18,10 @@ class InitialJobController {
       const Op = Sequelize.Op;
 
       const initialJobs = await InitialJob.findAll({
-        include:[{
+        include:{
           association: 'announcements', required : true,
           attributes: ['id' , 'title'],
-        }],
+        },
         where:{
           [Op.or]: [
             { to_user: req.params.id_hash },
@@ -29,6 +29,8 @@ class InitialJobController {
           ]
         }
       });
+
+      console.log(initialJobs)
   
       return res.json(initialJobs);
       
