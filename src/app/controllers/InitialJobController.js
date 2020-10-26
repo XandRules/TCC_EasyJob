@@ -27,7 +27,9 @@ class InitialJobController {
         }
       });
 
-      const announcements = await Announcement.findAll({
+      console.log(initialJobs)
+
+      const announcements = await Announcement.findByPk({
         where :{
           id: initialJobs.announcement_id,
         }
