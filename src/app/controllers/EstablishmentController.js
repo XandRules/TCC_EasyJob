@@ -5,73 +5,84 @@ import Establishment from "../models/Establishment";
 class EstablishmentController {
   
   async store(req, res) {
-    const schema = Yup.object().shape({
-      company_name: Yup.string().required(),
-      social_reason: Yup.string().required(),
-      email: Yup.string().email().required(),
-      cnpj: Yup.string().required(),
-      bio: Yup.string(),
-      phone: Yup.string().required(),
-      active: Yup.boolean().default(false),
-      terms_of_use: Yup.boolean(),
-      id_hash: Yup.string().required(),
-      password: Yup.string().required().min(6),
-      address_id : Yup.number().required(),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json("Validation fail");
-    }
-
-    const establishmentExists = await Establishment.findOne({
-      where: {
-        email: req.body.email,
-      },
-    });
-
-    if (establishmentExists) {
-      return res.status(400).json({
-        error: "Establishment already exists.",
-      });
-    }
-
-    let newEstablishment = null;
-
-    const t = await Sequelize.transaction();
-
     try {
-      newEstablishment = await Establishment.create(req.body);
-
-      t.commit();
-
-    } catch (error) {
-      t.roolback();
-      return res.json({
-        error: error.name,
+      const schema = Yup.object().shape({
+        company_name: Yup.string().required(),
+        social_reason: Yup.string().required(),
+        email: Yup.string().email().required(),
+        cnpj: Yup.string().required(),
+        bio: Yup.string(),
+        phone: Yup.string().required(),
+        active: Yup.boolean().default(false),
+        terms_of_use: Yup.boolean(),
+        id_hash: Yup.string().required(),
+        password: Yup.string().required().min(6),
+        address_id : Yup.number().required(),
       });
+  
+      await schema.validate(req.body, {
+        abortEarly: false,
+      });
+  
+      const establishmentExists = await Establishment.findOne({
+        where: {
+          email: req.body.email,
+        },
+      });
+  
+      if (establishmentExists) {
+        return res.status(400).json({
+          error: "Establishment already exists.",
+        });
+      }
+  
+      let newEstablishment = null;
+  
+      const t = await Sequelize.transaction();
+  
+      try {
+        newEstablishment = await Establishment.create(req.body);
+  
+        t.commit();
+  
+      } catch (error) {
+        t.roolback();
+        return res.json({
+          error: error.name,
+        });
+      }
+  
+      const {
+        id,
+        company_name,
+        social_reason,
+        email,
+        active,
+        cnpj,
+        phone,
+        id_hash,
+      } = newEstablishment;
+  
+      return res.json({
+        id,
+        company_name,
+        social_reason,
+        email,
+        active,
+        cnpj,
+        phone,
+        id_hash,
+      });
+      
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        console.log(error);
+        return res.json({
+          "error": error
+        });
+      }
     }
-
-    const {
-      id,
-      company_name,
-      social_reason,
-      email,
-      active,
-      cnpj,
-      phone,
-      id_hash,
-    } = newEstablishment;
-
-    return res.json({
-      id,
-      company_name,
-      social_reason,
-      email,
-      active,
-      cnpj,
-      phone,
-      id_hash,
-    });
+    return res.json({error : error})
   }
 
   async index(req, res) {
