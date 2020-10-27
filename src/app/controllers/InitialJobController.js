@@ -22,6 +22,7 @@ class InitialJobController {
         include:[{
           association : 'announcement',
           required : true,
+          attributes : ['id', 'title'],
         }] ,
         include:[{
           association: 'establishment',
