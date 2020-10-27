@@ -62,12 +62,13 @@ class InitialJobController {
 
       const Op = Sequelize.Op;
 
-      console.log("========================")
-
       const initialJobs = await InitialJob.count({
         where:{
           announcement_id: {
             [Op.ne]: null
+          },
+          accepted : {
+            [Op.eq]: null
           },
           [Op.or]: [
             { to_user: req.params.id_hash },
@@ -75,8 +76,6 @@ class InitialJobController {
           ]
         }
       });
-
-      console.log("========================")
   
       return res.json(initialJobs);
       
@@ -168,6 +167,33 @@ class InitialJobController {
             "error": error
           });
         }
+      }
+
+  }
+
+  async delete(req, res) {
+
+    try {
+ 
+        const initialJob = await InitialJob.findByPk(req.params.id);
+
+        if(!initialJob){
+          return res.json({error: 'Solicitação não encontrada!'})
+        }
+
+        const response = await initialJob.destroy(req.body);    
+    
+        return res.json({ 
+         response
+         });
+      
+      } catch (error) {
+       
+          console.log(error);
+          return res.json({
+            "error": error
+          });
+        
       }
 
   }

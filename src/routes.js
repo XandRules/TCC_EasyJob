@@ -66,6 +66,7 @@ routes.get("/initialjob", InitialJobController.index);
 routes.get("/initialjob/:id_hash", InitialJobController.indexById);
 routes.get("/initialjob/count/:id_hash", InitialJobController.indexByIdCount);
 routes.put("/initialjob/:id", InitialJobController.update);
+routes.delete("/initialjob/:id", InitialJobController.delete);
 
 routes.post("/files", upload.single("file"), FileController.store);
 
