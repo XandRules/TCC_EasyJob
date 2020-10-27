@@ -62,7 +62,7 @@ class AddressController {
 
     const address = await Address.findAll({
       where: {       
-          freelancer_id: req.params.id
+          id: req.params.id
         },
       atributes: [
         'id',
@@ -82,7 +82,7 @@ class AddressController {
 
     const address = await Address.findAll({
       where: {       
-          establish_id: req.params.id
+          id: req.params.id
       },
       atributes: [
         'id',
