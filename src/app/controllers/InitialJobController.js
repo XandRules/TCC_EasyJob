@@ -22,15 +22,15 @@ class InitialJobController {
         include:[{
           association : 'announcement',
           required : true,
-          include:[{
-            association: 'establishment',
-            required : true ,
-            include: [{
-              association : 'address',
-              required: true,
-            }],
-          }],          
         }] ,
+        include:[{
+          association: 'establishment',
+          required : true ,
+          include: [{
+            association : 'address',
+            required: true,
+          }],
+        }],          
         where:{
           [Op.or]: [
             { to_user: req.params.id_hash },
