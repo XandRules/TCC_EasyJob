@@ -9,10 +9,15 @@ class MailController {
     const {
       name,
       email,
-      role
+      role,
+      type,
+      begin_time,
+      end_time,
+      amount,
+      endereco
     } = req.body;
 
-    console.log('Mail: ' + name + " " + email + " " + role);
+    console.log('Mail', req.body );
 
 
     let transporter = nodemailer.createTransport(mail.transport);
@@ -23,13 +28,8 @@ class MailController {
       console.log('User: %s', token.user);
     });
 
-    transporter.sendMail({
-      "from": "xandrules@gmail.com",
-      "to": `${email}`,
-      "subject": "Confirmação de Cadastro",
-      "html": `
-      
-      <div>
+    let templateCadastro = `
+    <div>
 
       <div style='background:#4DBFBF;background-color:#4DBFBF;margin:0px auto;max-width:600px;'>
           <table align='center' border='0' cellpadding='0' cellspacing='0' role='presentation'
@@ -108,9 +108,95 @@ class MailController {
       </div>
 
   </div>
-      
-      
-      `
+    `;
+
+    let templateJob = `
+    <div>
+
+    <div style='background:#4DBFBF;background-color:#4DBFBF;margin:0px auto;max-width:600px;'>
+        <table align='center' border='0' cellpadding='0' cellspacing='0' role='presentation'
+            style='background:#4DBFBF;background-color:#4DBFBF;width:100%;'>
+
+            <h1 style="padding: 40px;color:#FFF;font-family:'Droid Sans', 'Helvetica Neue', Arial, sans-serif;font-size:40px;line-height:20px;text-align:center;">
+                Olá ${name}</h1>
+
+                <h3 style="padding: 40px;color:#FFF;font-family:'Droid Sans', 'Helvetica Neue', Arial, sans-serif;font-size:30px;line-height:20px;text-align:center;">
+                    Serviço aceito!</h3>
+           
+            <tbody>
+                <tr>
+                    <td style='direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;'>
+
+                        <div class='dys-column-per-100 outlook-group-fix'
+                            style='direction:ltr;display:inline-block;font-size:13px;text-align:left;vertical-align:top;width:100%;'>
+                            <table border='0' cellpadding='0' cellspacing='0' role='presentation'
+                                style='vertical-align:top;' width='100%'>
+                                 <tr>
+                                    <td align='center'
+                                        style='font-size:0px;padding:10px 25px;word-break:break-word;'>
+                                        <div
+                                            style="color:#FFFFFF;font-family:'Droid Sans', 'Helvetica Neue', Arial, sans-serif;font-size:36px;line-height:1;text-align:center;">
+                                           Atenção aos detalhes
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align='center'
+                                        style='font-size:0px;padding:10px 25px;word-break:break-word;'>
+                                        <div
+                                            style="color:#187272;font-family:'Droid Sans', 'Helvetica Neue', Arial, sans-serif;font-size:16px;line-height:20px;text-align:center;">
+                                           
+                                            <ol> Hora de entrada : ${begin_time}</ol>
+                                            <ol> Hora de saída : ${end_time}</ol>
+                                            <ol> Valor por hora : ${amount}</ol>
+                                            <ol> Local : ${endereco}</ol>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align='center'
+                                        style='font-size:0px;padding:10px 25px;word-break:break-word;'
+                                        vertical-align='middle'>
+                                        <table border='0' cellpadding='0' cellspacing='0' role='presentation'
+                                            style='border-collapse:separate;line-height:100%;width:200px;'>
+                                            <tr>
+                                                <td align='center' bgcolor='#178F8F' role='presentation'
+                                                    style='background-color:#178F8F;border:none;border-radius:4px;cursor:auto;padding:10px 25px;'
+                                                    valign='middle'>
+                                                    <a href='https://easyjobapp.vercel.app/#!/job/${role}'
+                                                        style="background:#178F8F;color:#ffffff;font-family:'Droid Sans', 'Helvetica Neue', Arial, sans-serif;font-size:16px;font-weight:bold;line-height:30px;margin:0;text-decoration:none;text-transform:none;"
+                                                        target='_blank'>
+                                                        Confirmar
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+    `;
+    var template = "";
+
+    if(type == 1){
+        template = templateCadastro;
+    }else{
+        template = templateJob;
+    }
+
+    transporter.sendMail({
+      "from": "xandrules@gmail.com",
+      "to": `${email}`,
+      "subject": "Confirmação de Cadastro",
+      "html": `${template}`
     }, (err, info) => {
       if (err) {
         return res.json({
