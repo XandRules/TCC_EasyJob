@@ -124,7 +124,6 @@ class EstablishmentController {
 
   async update(req, res) {
 
-    console.log('iniciou-se')
     try {
       console.log('try')
       const schema = Yup.object().shape({
@@ -165,11 +164,11 @@ class EstablishmentController {
 
       console.log("achou estabelecimento", req.body);      
 
-      if (oldPassword && !(await establishment.checkPassword(oldPassword))) {
-        return res.status(401).json({
-          error: "Password does not match",
-        });
-      }
+      // if (oldPassword && !(await establishment.checkPassword(oldPassword))) {
+      //   return res.status(401).json({
+      //     error: "Password does not match",
+      //   });
+      // }
 
       console.log("Vai atualizar")
 
