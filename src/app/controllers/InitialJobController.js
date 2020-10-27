@@ -20,7 +20,7 @@ class InitialJobController {
 
       const initialJobs = await InitialJob.findAll({
         include:[{
-          association : 'address',
+          association : 'announcement',
           required : true,
           include:[{
             association: 'establishment',
