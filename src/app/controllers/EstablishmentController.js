@@ -37,16 +37,11 @@ class EstablishmentController {
       }
   
       let newEstablishment = null;
-  
-      const t = await Sequelize.transaction();
-  
+    
       try {
         newEstablishment = await Establishment.create(req.body);
-  
-        t.commit();
-  
+    
       } catch (error) {
-        t.roolback();
         return res.json({
           error: error.name,
         });
