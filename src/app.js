@@ -17,14 +17,20 @@ class App {
   }
 
   middlewares() {
-    this.server.use(
-      cors({
-        origin: ['https://easyjobapp.vercel.app', process.env.APP_URL],
-        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-        allowedHeaders: '*',
-        exposedHeaders: 'x-total-count',
-      })
-    );
+    console.log(process.env.NODE_ENV)
+    // if(process.env.NODE_ENV == 'prod'){
+    //   this.server.use(
+    //     cors({
+    //       origin: ['https://easyjobapp.vercel.app', process.env.APP_URL],
+    //       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    //       allowedHeaders: '*',
+    //       exposedHeaders: 'x-total-count',
+    //     })
+    //   );      
+    // }else{
+      this.server.use(cors());
+    // }
+
     this.server.use(express.json());
     this.server.use(
       '/file',

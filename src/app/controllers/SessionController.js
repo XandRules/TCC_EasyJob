@@ -12,11 +12,15 @@ class SessionController {
       password
     } = req.body;
 
+    console.log("req.body", email)
+
     const freelancer = await Freelancer.findOne({
       where: {
         email
       }
     });
+
+    console.log("encontrou usuario", freelancer)
 
     if (!freelancer) {
       return res.json({

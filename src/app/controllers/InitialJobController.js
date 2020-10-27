@@ -4,6 +4,7 @@ import Job from '../models/Job';
 import InitialJob from '../models/Initialjob';
 import Sequelize from 'sequelize';
 import Announcement from '../models/Announcements';
+import Establishment from '../models/Establishment';
 
 class InitialJobController {
   async index(req, res) {
@@ -18,7 +19,8 @@ class InitialJobController {
 
       const Op = Sequelize.Op;
 
-      const initialJobs = await InitialJob.findAll({
+     const initialJobs = await InitialJob.findAll({
+        
         include:[{
           association : 'announcement',
           required : true,
@@ -27,14 +29,17 @@ class InitialJobController {
         include:[{
           association: 'establishment',
           required : true ,
-          attributes : ["company_name"],
+          attributes : ["id","company_name"],
           include: [{
             association : 'address',
             required: true,
             attributes :['public_place','number', 'city', 'neighborhood']
           }],
-        }],          
+        }],        
         where:{
+          announcement_id: {
+            [Op.ne]: null
+          },
           [Op.or]: [
             { to_user: req.params.id_hash },
             { from_user: req.params.id_hash}
@@ -57,14 +62,21 @@ class InitialJobController {
 
       const Op = Sequelize.Op;
 
+      console.log("========================")
+
       const initialJobs = await InitialJob.count({
         where:{
+          announcement_id: {
+            [Op.ne]: null
+          },
           [Op.or]: [
             { to_user: req.params.id_hash },
             { from_user: req.params.id_hash}
           ]
         }
       });
+
+      console.log("========================")
   
       return res.json(initialJobs);
       
