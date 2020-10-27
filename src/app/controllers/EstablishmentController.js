@@ -184,7 +184,7 @@ class EstablishmentController {
         phone,
       });
     } catch (error) {
-      console.log('entrou no catch')
+      console.log('entrou no catch', error)
       if (error instanceof Yup.ValidationError) {
         console.log(error);
         return res.json({
