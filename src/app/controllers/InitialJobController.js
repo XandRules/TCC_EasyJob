@@ -26,6 +26,8 @@ class InitialJobController {
             association : 'address',
             required: true,
           }],
+          association: 'address',
+          required : true,
         }],
         where:{
           [Op.or]: [
@@ -33,8 +35,6 @@ class InitialJobController {
             { from_user: req.params.id_hash}
           ]
         }
-      }).then(result =>{
-        console.log(result)
       });
 
       console.log("initialJobs", initialJobs)
