@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import Establishment from "../models/Establishment";
 
 class EstablishmentController {
+  
   async store(req, res) {
     const schema = Yup.object().shape({
       company_name: Yup.string().required(),
@@ -36,10 +37,16 @@ class EstablishmentController {
 
     let newEstablishment = null;
 
+    const t = await Sequelize.transaction();
+
     try {
       newEstablishment = await Establishment.create(req.body);
+
+      t.commit();
+
     } catch (error) {
-      return res.status(401).json({
+      t.roolback();
+      return res.json({
         error: error.name,
       });
     }
