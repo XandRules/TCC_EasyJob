@@ -197,6 +197,7 @@ class MailController {
       "to": `${email}`,
       "subject": "Confirmação de Cadastro",
       "html": `${template}`
+      
     }, (err, info) => {
       if (err) {
         return res.json({
