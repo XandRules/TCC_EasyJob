@@ -22,14 +22,16 @@ class InitialJobController {
         include:[{
           association : 'announcement',
           required : true,
-          attributes : ['id', 'title'],
+          attributes : ['title'],
         }] ,
         include:[{
           association: 'establishment',
           required : true ,
+          attributes : ["company_name"],
           include: [{
             association : 'address',
             required: true,
+            attributes :['public_place','number', 'city', 'neighborhood']
           }],
         }],          
         where:{
