@@ -35,10 +35,10 @@ routes.post("/specialities", SpecialityController.store);
 
 routes.use(authMiddleware);
 
-routes.post("/freelancers/password/:id", FreelancerController.checkPasswordById);
-routes.post("/establishments/password/:id", EstablishmentController.checkPasswordById);
 
 // PRIVATE ROUTES
+routes.post("/freelancers/password/:id", FreelancerController.checkPasswordById);
+routes.post("/establishments/password/:id", EstablishmentController.checkPasswordById);
 
 routes.get("/address", AddressController.index);
 routes.get("/address/freelancer/:id", AddressController.freelancerAddress);
