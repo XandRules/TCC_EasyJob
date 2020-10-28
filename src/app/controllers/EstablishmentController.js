@@ -138,6 +138,29 @@ class EstablishmentController {
     });
   }
 
+  async checkPasswordById(req, res) {
+
+    console.log(req.params.id, req.body);
+
+    const establishment = await Establishment.findOne({
+      where: {
+        id: req.params.id
+      }
+    });
+
+    if(!establishment){
+
+      return res.json({status: "error"});
+    }
+    const check = await establishment.checkPassword(req.body.password);
+
+    if(check){
+      return res.json({status: "ok"})
+    }
+
+    return res.json({status: "error"});
+  }
+
   async update(req, res) {
 
     try {

@@ -130,6 +130,31 @@ class FreelancerController {
     });
   }
 
+
+  async checkPasswordById(req, res) {
+
+    console.log(req.params.id, req.body);
+
+    const freelancer = await Freelancer.findOne({
+      where: {
+        id: req.params.id
+      }
+    });
+
+    if(!freelancer){
+
+      return res.json({status: "error"});
+    }
+    const check = await freelancer.checkPassword(req.body.password);
+
+    if(check){
+      return res.json({status: "ok"})
+    }
+
+    return res.json({status: "error"});
+  }
+  
+
   async update(req, res) {
     try {
       const schema = Yup.object().shape({

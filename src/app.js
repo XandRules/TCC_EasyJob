@@ -18,7 +18,6 @@ class App {
 
   middlewares() {
     console.log(process.env.NODE_ENV)
-    // if(process.env.NODE_ENV == 'prod'){
       this.server.use(
         cors({
           origin: ['https://easyjobapp.vercel.app', process.env.APP_URL],
@@ -26,10 +25,10 @@ class App {
           allowedHeaders: '*',
           exposedHeaders: 'x-total-count',
         })
-      );      
-    // }else{
-     // this.server.use(cors());
-    // }
+      );     
+  
+      //this.server.use(cors());
+
 
     this.server.use(express.json());
     this.server.use(
