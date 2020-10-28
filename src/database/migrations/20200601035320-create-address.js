@@ -31,26 +31,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      // freelancer_id: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: 'freelancers',
-      //     key: 'id'
-      //   },
-      //   onUpdate: 'CASCADE',
-      //   onDelete: 'CASCADE',
-      //   allowNull: true,
-      // },
-      // establish_id: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: 'establishments',
-      //     key: 'id'
-      //   },
-      //   onUpdate: 'CASCADE',
-      //   onDelete: 'CASCADE',
-      //   allowNull: true,
-      // },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

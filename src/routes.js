@@ -20,6 +20,8 @@ const routes = new Router();
 
 const upload = multer(multerConfig);
 
+// PUBLIC ROUTES
+
 routes.post("/freelancers", FreelancerController.store);
 routes.post("/address", AddressController.store);
 routes.post("/establishment", EstablishmentController.store);
@@ -30,6 +32,8 @@ routes.post("/mail", MailController.sendMail);
 routes.post("/specialities", SpecialityController.store);
 
 routes.use(authMiddleware);
+
+// PRIVATE ROUTES
 
 routes.get("/address", AddressController.index);
 routes.get("/address/freelancer/:id", AddressController.freelancerAddress);
