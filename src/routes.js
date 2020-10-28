@@ -26,6 +26,8 @@ routes.post("/freelancers", FreelancerController.store);
 routes.post("/address", AddressController.store);
 routes.post("/establishment", EstablishmentController.store);
 routes.post("/sessionsfreelancer", SessionController.storeFreelancer);
+routes.post("/emailestablishment", EstablishmentController.indexByEmail);
+routes.post("/emailfreelancer", FreelancerController.indexByEmail);
 routes.post("/sessionsestablishment", SessionController.storeEstablishment);
 routes.get("/specialities", SpecialityController.index);
 routes.post("/mail", MailController.sendMail);

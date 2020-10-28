@@ -28,7 +28,7 @@ class App {
         })
       );      
     // }else{
-      // this.server.use(cors());
+     // this.server.use(cors());
     // }
 
     this.server.use(express.json());

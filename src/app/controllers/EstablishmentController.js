@@ -122,6 +122,22 @@ class EstablishmentController {
     return res.json(establishment);
   }
 
+  async indexByEmail(req, res) {
+
+    const establishment = await Establishment.findAll({
+      where: {
+        email: req.body.email
+      }
+    });
+
+    const {name, email} = establishment[0];
+
+    return res.json({
+      name,
+      email
+    });
+  }
+
   async update(req, res) {
 
     try {

@@ -114,6 +114,22 @@ class FreelancerController {
     return res.json(freelancer);
   }
 
+  async indexByEmail(req, res) {
+
+    const freelancer = await Freelancer.findAll({
+      where: {
+        email: req.body.email
+      }
+    });
+
+    const {name, email} = freelancer[0];
+
+    return res.json({
+      name,
+      email
+    });
+  }
+
   async update(req, res) {
     try {
       const schema = Yup.object().shape({
