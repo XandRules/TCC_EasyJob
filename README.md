@@ -11,8 +11,8 @@ yarn start
 ## :rocket: Sobre a Aplicação
 ## Tecnologias utilizadas
 
-Nodejs
-Sequelize
-Socket.io
-NodeMailer
-Postgres
+###Nodejs
+###Sequelize
+###Socket.io
+###NodeMailer
+###PostgreSQL
