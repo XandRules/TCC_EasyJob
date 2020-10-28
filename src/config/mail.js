@@ -12,8 +12,8 @@ export default {
       "user": "xandrules@gmail.com",
       "clientId": "128826042594-0b0ade1t7o4afj4fcl629tvr6irqt48t.apps.googleusercontent.com",
       "clientSecret": "onRadfB7cixkdg87h3VcQKHN",
-      "refreshToken": "1//0495bFq0hLR1bCgYIARAAGAQSNgF-L9Ir9HOyqKj93gYFtwCXT7AFktGtSQxTlhgc7RbFLDpojLYBL1P6d4xp4bsraG8tUNkUUw",
-      "accessToken": "ya29.a0AfH6SMCgsnWNJGU-w_Mw5J0jtfI0NFC1TF-dOh-zA0-uf9YLA_MAkZEErU-kHqtokRV_TDKfeMOFiE_8HgvNpnENCyCPZKBTMpaprz2pXcFr33wzvVwOmwkfyCsc8BKL8lce7TR5jiKbzT8wp-QOJMoyMKCgqpWV0vj7"
+      "refreshToken": "1//04vvbZqtk0GRvCgYIARAAGAQSNgF-L9Ir0cLG_3LL-Tt0lQoCENZlTv_qMPDpdfbvHKh74-S_V78S0DxyQAOUtQSZ2DLvfM_Dsg",
+      "accessToken": "ya29.A0AfH6SMDvFDv_NmyqB-WfAxv8fyPSTJ6WXCbY1E-Rm2GosA_tc3ZIAvsVTsrN6nVl7RNssUXGUQfLO1RqXRVrGyj2CZ6cH6hOEBk5-AqWBigH6iVau3IRwN0lqZCAWUnDg7RkKa3Ua2EuQAS5SDSAGgEAvmB5JCjbew71NZzKUOY"
     }
   }
 };
