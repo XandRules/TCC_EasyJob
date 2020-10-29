@@ -87,6 +87,8 @@ class AnnouncementsController {
   }
 
   async indexByFreelancerId(req, res) {
+
+    console.log("freelancer");
     const announcements = await Announcements.findAll({      
       include:[{
         association : 'freelancer',
