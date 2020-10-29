@@ -86,10 +86,40 @@ class AnnouncementsController {
     return res.json(announcements);
   }
 
-  async indexById(req, res) {
-    const announcements = await Announcements.findAll({
+  async indexByFreelancerId(req, res) {
+    const announcements = await Announcements.findAll({      
+      include:[{
+        association : 'freelancer',
+        required : true,
+      }] ,      
       where: {
         freelancer_id: req.params.id
+      },
+      atributes: [
+        'id',
+        'description',
+        'title',
+        'amount',
+        'city',
+        'day_of_week',
+        'period',
+        'freelancer_id',
+        'speciality_id',
+      ],
+    });
+
+    return res.json(announcements);
+  }
+
+  async indexById(req, res) {
+    
+    const announcements = await Announcements.findAll({
+      include:[{
+        association : 'freelancer',
+        required : true,
+      }] , 
+      where: {
+        id: req.params.id
       },
       atributes: [
         'id',

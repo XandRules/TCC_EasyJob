@@ -1,6 +1,6 @@
 import Freelancer from '../models/freelancer'
 import Chat from '../models/Chat'
-
+import Sequelize from 'sequelize';
 import * as Yup from 'yup';
 import Establishment from '../models/Establishment';
 
@@ -51,14 +51,23 @@ class ChatController {
 
   async indexFromUser(req,res){
     try {
+
+      const Op = Sequelize.Op;
+
+      console.log("try", req.params.id_hash);
       const chat = await Chat.findAll({
         where: {
-          to_user: req.params.id_hash
+          [Op.or]: [
+            { to_user: req.params.id_hash },
+            { from_user: req.params.id_hash}
+          ]
         }
       });
 
+      console.log("chat", chat);
+
       if(!chat){
-        return res.json(chat);
+        return res.json({error: "nenhuma mensagem encontrada"});
       }
 
       return res.json(chat);
