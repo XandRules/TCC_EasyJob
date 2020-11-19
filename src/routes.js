@@ -66,7 +66,7 @@ routes.get("/announcements/:id", AnnouncementController.findAnnouncemetFromFreel
 routes.get("/announcements/freelancer/:id", AnnouncementController.indexByFreelancerId);
 routes.get("/announcements/search/:id", AnnouncementController.indexById);
 routes.put("/announcements/:id", AnnouncementController.update);
-routes.get("/announcements/:id", AnnouncementController.findAnnouncemetFromFreelancer);
+routes.get("/announcements/search2/:id", AnnouncementController.findAnnouncemetFromFreelancer);
 routes.delete("/announcements/:id", AnnouncementController.delete);
 
 routes.post("/jobs", JobController.store);
