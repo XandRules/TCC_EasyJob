@@ -3,6 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   return sequelize.define('freelancer', {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
+<<<<<<< HEAD
     password_hash: DataTypes.STRING,
     phone: DataTypes.STRING,
     cpf: DataTypes.STRING,
@@ -15,5 +16,13 @@ module.exports = function(sequelize, DataTypes) {
     speciality_id: DataTypes.NUMBER,
     avatar_id: DataTypes.NUMBER,
     id_hash: DataTypes.STRING,
+=======
+    gender: DataTypes.STRING,
+    birth: DataTypes.STRING,
+    cpf: DataTypes.STRING,
+    phone: DataTypes.STRING,
+    password: DataTypes.STRING,
+    active: DataTypes.BOOLEAN
+>>>>>>> add classes de teste
   });
 };
