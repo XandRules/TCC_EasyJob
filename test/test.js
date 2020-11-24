@@ -32,6 +32,7 @@ describe("Freelancer", async function() {
     });
 
     let data = {
+        "id_hash":"adkasldkALSDa4sd4A4SADa7asdAADas4d5645A4S5D454asd",
         "name": "Alexandre Ribeiro",
         "email":"alexandre@email.com",
         "gender": "Masculino",
@@ -39,7 +40,11 @@ describe("Freelancer", async function() {
         "cpf": "12345788911",
         "phone": "99995648999",
         "password_hash": "123456",
-        "active":	true
+        "bio": "",
+        "active":	true,
+        "terms_of_use": true,
+        "speciality_id": 1,
+        "address_id": 1
     }
   
     await it("create", function() {
