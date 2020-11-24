@@ -1,4 +1,5 @@
-web: yarn start
+web: npm start
+start: yarn start
 server: yarn sequelize-cli db:migrate
 chat_undo: yarn sequelize db:migrate:undo:all --to 20200605235002-create_chat.js
 freelancer_undo: yarn sequelize db:migrate:undo:all --to 20200601035400-create-freelancer.js
