@@ -2,7 +2,9 @@ import * as Yup from 'yup';
 
 import Announcements from '../models/Announcements';
 import Freelancer from '../models/freelancer';
+import Speciality from '../models/Speciality';
 import Specialities from '../models/Speciality';
+import Sequelize from 'sequelize';
 
 class AnnouncementsController {
   async store(req, res) {
@@ -277,6 +279,71 @@ class AnnouncementsController {
 
   }
 
+  async findAnnouncemetByFilter(req, res) {
+
+    try {
+
+      const Op = Sequelize.Op;
+
+      console.log(req.body)
+
+      const period = req.body.period != undefined ? req.body.period : '';
+      const day_of_week = req.body.day != undefined ? req.body.day : '';
+      const city = req.body.city != undefined ? req.body.city : '';
+
+      const speciality = await Speciality.findOne({
+          where:{
+            speciality_function: req.body.speciality
+          }
+      });
+
+      console.log(speciality.id)
+      
+      if(!speciality){
+        return res.json('Especialidade não encontrada');
+      }
+      
+      const announcements = await Announcements.findAll({
+        include:[{
+          association : 'freelancer',
+          required : true,
+        }],  
+        include:[{
+          association : 'speciality',
+          required : true,
+        }],    
+        where: {
+          speciality_id : speciality.id,      
+          period : {
+            [Op.substring]: period
+          },
+          day_of_week : {
+            [Op.substring]: day_of_week
+          },
+          city : {
+            [Op.substring]: city
+          },
+        }
+      });    
+
+      if(!announcements){
+        return res.json('Anuncio não encontrado');
+      }
+
+      console.log(announcements);
+
+      return res.json(announcements);
+
+
+    } catch (error) {
+
+      console.log(error);
+      return res.json({
+        "error": error
+      });
+    }
+
+  }
 
 };
 

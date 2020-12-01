@@ -20,17 +20,5 @@ class Address extends Model {
     return this;
   }
 
-  // static associate(models) {
-  //   this.belongsTo(models.Freelancer, {
-  //     foreignKey: 'freelancer_id',
-  //     as: 'freelancer',
-  //   });
-
-  //   this.belongsTo(models.Establishment, {
-  //     foreignKey: 'establish_id',
-  //     as: 'establishment',
-  //   });
-  // }
-
 }
 export default Address;
