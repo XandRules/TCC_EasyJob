@@ -159,8 +159,6 @@ class AnnouncementsController {
   
       const announcements = await Announcements.findByPk(req.params.id);
   
-      // return res.json(announcements);
-  
       if (!announcements) {
         return res.status(400).json({
           error: 'Announcements not Found'
