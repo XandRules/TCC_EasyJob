@@ -5,4 +5,3 @@ node_modules
 tmp/uploads/*
 !tmp/uploads/.needfile
 
-yarn.lock
