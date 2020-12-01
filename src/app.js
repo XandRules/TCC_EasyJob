@@ -18,14 +18,14 @@ class App {
 
   middlewares() {
     console.log(process.env.NODE_ENV)
-      this.server.use(
-        cors({
-          origin: ['https://easyjobapp.vercel.app', process.env.APP_URL],
-          methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-          allowedHeaders: '*',
-          exposedHeaders: 'x-total-count',
-        })
-      );     
+    this.server.use(
+      cors({
+        origin: ['https://easyjobapp.vercel.app', process.env.APP_URL],
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        allowedHeaders: '*',
+        exposedHeaders: 'x-total-count',
+      })
+    );     
   
       //this.server.use(cors());
 
