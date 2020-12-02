@@ -97,7 +97,7 @@ class InitialJobController {
           date: Yup.date().required(),
           begin_time: Yup.string().required(),
           end_time: Yup.string().required(),
-          accepted : Yup.boolean().default(false),
+          accepted : Yup.string().default('Pendente'),
           announcement_id: Yup.number().required(),
           establishment_id: Yup.number().required(),
         });
@@ -133,7 +133,7 @@ class InitialJobController {
 
     try {
         const schema = Yup.object().shape({
-          accepted : Yup.boolean().required(),
+          accepted : Yup.string().required(),
         });
     
         await schema.validate(req.body, {

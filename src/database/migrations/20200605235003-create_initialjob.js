@@ -36,7 +36,7 @@ module.exports = {
         allowNull: false,
       },
       accepted: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING,
         allowNull: true,
       },
       announcement_id: {

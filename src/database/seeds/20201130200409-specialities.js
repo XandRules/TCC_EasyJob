@@ -2,7 +2,7 @@ module.exports = {
     up: (queryInterface, Sequelize) => queryInterface.bulkInsert('specialities', 
       [
         {
-          speciality_function: 'Garçon',
+          speciality_function: 'Garçon/Garçonete',
         },
         {
           speciality_function: 'Recepcionista',
