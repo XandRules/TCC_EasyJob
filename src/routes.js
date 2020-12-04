@@ -72,6 +72,7 @@ routes.delete("/announcements/:id", AnnouncementController.delete);
 
 routes.post("/jobs", JobController.store);
 routes.get("/jobs", JobController.index);
+routes.put("/jobs/:id", JobController.update);
 
 routes.post("/initialjob", InitialJobController.store);
 routes.get("/initialjob", InitialJobController.index);

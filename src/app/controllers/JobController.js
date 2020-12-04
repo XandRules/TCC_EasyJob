@@ -71,6 +71,48 @@ class JobController {
 
     return res.json({ job });
   }
+
+  async update(req, res) {
+    try {
+      const schema = Yup.object().shape({
+        freelancer_evaluation: Yup.number(),
+        freelancer_comment: Yup.string(),
+        establishment_evaluation: Yup.number(),
+        establishment_comment: Yup.string(),
+      });
+
+      await schema.validate(req.body, {
+        abortEarly: false,
+      });
+
+
+
+      const job = await Job.findByPk(req.params.id);
+
+      console.log(req.body)
+
+      if (!job) {
+        return res.status(404).json({
+          error: 'User not Found'
+        });
+      }      
+
+    const jobs = await job.update(
+        req.body
+      );
+
+    return res.json(jobs);
+
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        console.log(error);
+        return res.json({
+          "error": error
+        });
+      }
+    }
+
+  }
 }
 
 export default new JobController();
