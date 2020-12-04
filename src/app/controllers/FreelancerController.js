@@ -122,7 +122,14 @@ class FreelancerController {
       }
     });
 
-    const {name, email} = freelancer[0];
+    console.log(freelancer.length);
+
+    if(freelancer.length == 0){
+      return res.json({'message':'email não cadastrado'});
+    }else{
+      const {name, email} = freelancer[0];
+    }
+
 
     return res.json({
       name,
